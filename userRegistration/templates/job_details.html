@@ -1,0 +1,126 @@
+{% extends 'base.html' %}{% load staticfiles %}
+{% block pageHead %}
+    <h1 class="center">Job Details</h1>
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Job Details</a></li>
+    </ul>
+{% endblock %}
+
+
+{% block pageContent %}
+<div class="row" ng-controller="JobDetailPage">
+<div class="row">
+    <div class="col-sm-7">
+        <div class="position-header">
+            <h1>
+                {{opng_details.job_title}}
+            </h1>
+        </div><!-- /.position-header -->
+
+        <div class="position-general-information">
+            <dl>
+                <dt>Location</dt>
+                <dd>{{opng_details.location}}</dd>
+
+                <dt>Created Date</dt>
+                <dd>{{opng_details.created_at}}</dd>
+
+                <dt>Qualification</dt>
+                <dd>{{opng_details.qualifications}}</dd>
+
+                <dt>Salary</dt>
+                <dd>{{opng_details.annual_ctc_min}} - {{opng_details.annual_ctc_max}}</dd>
+
+                <dt>Job ID</dt>
+                <dd>#{{opng_details.job_id}}</dd>
+
+                <dt>Work Experince</dt>
+                <dd>{{opng_details.work_experienc_min}} - {{opng_details.work_experienc_max}}</dd>
+            </dl>
+        </div><!-- /.position-general-information -->
+
+        <h3 class="page-header">Description, duties, responsibilities</h3>
+        <p>
+            {{opng_details.job_description}}
+        </p>
+
+        <h3 class="page-header">Other Details</h3>
+        <ul>
+            <li>No. openings : {{opng_details.number_of_vacancies}}</li>
+            <li>Functional Area : {{opng_details.functional_area}}</li>
+            <li>Job Role : {{opng_details.job_role}}</li>
+            <li>Skill : {{opng_details.skill}}</li>
+            <li>Contact Number : {{opng_details.contact_number}}</li>
+            <li>Contact Email : {{opng_details.contact_email}}</li>
+        </ul>
+    </div><!-- /.col-* -->
+
+    <div class="col-sm-5">
+        <div class="company-card">
+            <div class="company-card-image">
+                <span>Other Details</span>
+            </div><!-- /.company-card-image -->
+            <div class="company-card-data">
+                <dl>
+                    <dt>Website</dt>
+                    <dd><a href="">{{opng_details.company.website}}</a></dd>
+
+                    <dt>E-mail</dt>
+                    <dd><a href="#">{{opng_details.company.user_profile.email}}</a></dd>
+
+                    <dt>Phone</dt>
+                    <dd>{{opng_details.company.contact_number}}</dd>
+
+                    <dt>Address</dt>
+                    <dd>
+                        {{opng_details.company.address}}
+                    </dd>
+                </dl>
+            </div><!-- /.company-card-data -->
+        </div><!-- /.company-card -->
+
+        {% if opng_details.active_status %}
+
+        Job Status : <button class="btn btn-secondary " style="background-color: #4a91b3">Open</button>
+        <button class="btn btn-secondary pull-right" ng-click="close_job_position_popup()">Close Position</button>
+
+        {% else %}
+
+        Job Status : <button class="btn btn-secondary " style="background-color: red">Closed</button>
+
+        {% endif %}
+
+    </div><!-- /.col-* -->
+</div>
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="left: 54%;bottom: 73%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Conformation to close the position </h4>
+      </div>
+       <form method="post" action='{% url "close_the_position" opng_details.id %}'>{% csrf_token %}
+          <div class="modal-footer">
+            <button  type="submit" class="btn btn-primary">Ok</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+      </form>
+    </div><!-- /.modal-content -->
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}

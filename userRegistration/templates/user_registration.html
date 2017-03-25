@@ -1,0 +1,107 @@
+
+
+{% extends 'base.html' %}
+
+
+{% block pageHead %}
+    <h1 class="center">Join Now</h1>
+{% endblock %}
+
+{% block pageContent %}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">
+                    <strong>Create Account Account</strong>
+                    
+                </a>
+            </li>
+        </ul>
+
+
+
+        <div class="tab-content">
+            <form method="post" action='{% url "register_company_profile" %}'>{% csrf_token %}
+            <div role="tabpanel" class="tab-pane active" id="personal">
+                <div class="row">
+                    <div class="col-sm-3">
+                    </div>
+                    <div class="col-sm-6">
+
+
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="form-register-first-name">First Name</label>
+                                {{cmpny_form.first_name}}
+                                {{cmpny_form.first_name.errors}}
+                            </div><!-- /.form-group -->
+
+                            <div class="form-group col-sm-6">
+                                <label for="form-login-surname">Last Name</label>
+                                {{cmpny_form.last_name}}
+                                {{cmpny_form.last_name.errors}}
+                            </div><!-- /.form-group -->
+                        </div><!-- /.row -->
+
+
+
+                        <div class="form-group">
+                            <label for="form-register-email">E-mail</label>
+                            {{cmpny_form.email}}
+                            {{cmpny_form.email.errors}}
+                        </div><!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label for="form-register-password">Password</label>
+                            <input type="password" name="password" class="form-control" id="form-register-password">
+                        </div><!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label for="form-register-retype">Retype</label>
+                            <input type="password" name="password2" class="form-control" id="form-register-retype">
+                        </div><!-- /.form-group -->
+
+
+                    </div><!-- /.col-* -->
+
+
+
+                </div><!-- /.row -->
+
+
+
+
+
+
+
+
+
+
+                <div class="center">
+                    <div class="checkbox checkbox-info">
+                        <label><input type="checkbox"> By signing up, you agree with the <a href="#">terms and conditions</a></label>
+                    </div><!-- /.checkbox -->
+
+                    <button type="submit" class="btn btn-secondary">Create an Account</button>
+                </div><!-- /.center -->
+            </div><!-- /.tab-pane -->
+            </form>
+        </div><!-- /.tab-content -->
+    </div><!-- /.col-* -->
+</div><!-- /.row -->
+
+<style type="text/css">
+    
+.errorlist {
+
+    color : red;
+}
+
+</style> 
+
+{% endblock %}
+
+

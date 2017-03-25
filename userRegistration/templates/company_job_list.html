@@ -1,0 +1,133 @@
+{% extends 'base.html' %}{% load staticfiles %}
+{% block pageHead %}
+    <h1 class="center">{{cmp_details.name}} Job List</h1>
+{% endblock %}
+
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Job List</a></li>
+    </ul>
+{% endblock %}
+
+
+{% block pageContent %}
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script ref="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css">
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+<div class="row">
+    <div class="col-sm-4">
+		<div class="company-card">
+		    <div class="company-card-image">
+		        <span>Employeer</span>
+		        <a href="company-detail.html">
+		            <img src="{% static 'img/logo.png' %}" alt=""></a>
+		        
+		    </div><!-- /.company-card-image -->
+
+		    <div class="company-card-data">
+		        <dl>
+		            <dt>Website</dt>
+		            <dd><a href="{{cmp_details.website}}">{{cmp_details.website}}</a></dd>
+
+		            <dt>E-mail</dt>
+		            <dd>{{cmp_details.user_profile.email}}</dd>
+
+		            <dt>Phone</dt>
+		            <dd>{{cmp_details.contact_number}}</dd>
+
+		            <dt>Address</dt>
+		            <dd>
+		                {{cmp_details.address}}
+		            </dd>
+		        </dl>
+		    </div><!-- /.company-card-data -->
+		</div><!-- /.company-card -->
+
+
+            <div class="widget">
+                <ul class="social-links">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                </ul>
+            </div><!-- /.widget -->
+
+            <div class="widget">
+                <h2>Created By</h2>
+
+			    <div class="company-card-data">
+			        <dl>
+			            <dt>Name</dt>
+			            <dd>{{cmp_details.user_profile.first_name}} {{cmp_details.user_profile.last_name}}</dd>
+
+			            <dt>Username</dt>
+			            <dd>{{cmp_details.user_profile.username}}</dd>
+
+			            <dt>Created At</dt>
+			            <dd>{{cmp_details.user_profile.date_joined}}</dd>
+			        </dl>
+		    </div><!-- /.company-card-data -->
+            </div><!-- /.widget -->
+        </div><!-- /.col-* -->
+
+        <div class="col-sm-8">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="page-header"><strong>{{ opng_details|length }}</strong>  matching your query</h2>
+
+                    <div class="candidates-list">
+
+                    {% for op_obj in opng_details %}
+                                <div class="companies-list-item">
+                                    <div class="companies-list-item-image">
+                                <a href="#">
+                                    <img src="" alt="{{forloop.counter}}" style="width: 14px;">
+                                </a>
+                            </div><!-- /.companies-list-item-image -->
+
+                            <div class="companies-list-item-heading">
+                                <h2><a href="{% url 'job_details' op_obj.id %}">{{op_obj.job_title}}</a></h2>
+                                <h3>{{op_obj.location}}</h3>
+
+                            </div><!-- /.companies-list-item-heading -->
+
+                            <div class="companies-list-item-count">
+                                {% if op_obj.active_status %}
+                                    Job Status : <p  style="color: #4a91b3">Open</p>
+                                {% else %}
+                                    Job Status : <p style="color: red">Closed</p>
+                                {% endif %}
+                            </div><!-- /.positions-list-item-count -->
+
+                            <div class="companies-list-item-rating">
+                                Experince : 
+                                <span class="companies-list-item-rating-count">{{op_obj.work_experienc_min}} - {{op_obj.work_experienc_max}}</span>
+                            </div><!-- /.companies-list-item-rating -->
+
+                        </div><!-- /.companies-list-item --> 
+                    {% endfor %}
+
+                    </div><!-- /.candidates-list -->
+                </div><!-- /.col-* -->
+                </div>
+
+
+        </div><!-- /.col-sm-8 -->
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#datetimepicker4').datepicker();
+        $('#datetimepicker5').datepicker();
+    });
+</script>
+
+{% endblock %}
