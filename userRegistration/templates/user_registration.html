@@ -12,19 +12,9 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active">
-                <a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">
-                    <strong>Create Account Account</strong>
-                    
-                </a>
-            </li>
-        </ul>
 
 
-
-        <div class="tab-content">
-            <form method="post" action='{% url "register_company_profile" %}'>{% csrf_token %}
+        <form method="post" action='{% url "register_company_profile" %}'>{% csrf_token %}
             <div role="tabpanel" class="tab-pane active" id="personal">
                 <div class="row">
                     <div class="col-sm-3">
@@ -89,7 +79,6 @@
                 </div><!-- /.center -->
             </div><!-- /.tab-pane -->
             </form>
-        </div><!-- /.tab-content -->
     </div><!-- /.col-* -->
 </div><!-- /.row -->
 

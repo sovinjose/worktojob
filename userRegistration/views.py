@@ -118,13 +118,13 @@ class CreateCompanyAccount(View):
 class CompanyAccountDetails(View):
 
     def get(self, requests):
-        cmp_details = CompanyProfile.objects.get(user_profile=requests.user)
+        # = CompanyProfile.objects.get(user_profile=requests.user)
         #openong_details = OpeningDetails.objects.filter(company__user_profile = requests.user)
         context = {
-            'cmp_details' : cmp_details,
+            #'cmp_details' : cmp_details,
             #'openong_details' : openong_details
         }
-        return render(requests, 'company_details.html', context)
+        return render(requests, 'job_profile_details.html', context)
 
 
 class PostNewJob(View):

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}{% load staticfiles %}
+{% block pageHead %}
+    <h1 class="center">Profile Details</h1>
+{% endblock %}
+
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Profile</a></li>
+    </ul>
+{% endblock %}
+
+
+{% block pageContent %}
+<div class="row">
+    <div class="col-sm-5" style="margin-bottom: 6%;">
+        <h4>Welcome to WorktoJob Recruiter!</h4>
+        <p>We have got some app integrations to get your job done faster? Check them out here!  - Slack, Workable</p>
+    </div>
+</div>
+
+<div class="row">
+
+
+
+    <div class="col-sm-2">
+		<div class="company-card" style="background-color: #fff;">
+		    <div class="company-card-image">
+		        <a href="{% url 'create_job_profile' %}"><i class="fa fa-plus fa-3x" style="color: #ccc;"></i></a>
+		        
+		    </div><!-- /.company-card-image -->
+		</div><!-- /.company-card -->
+    </div><!-- /.col-* -->
+</div>
+
+<style type="text/css">
+    
+
+
+.company-card {
+    border: 1px solid #e25e00;
+    border-radius: 17px;
+    margin: 0px 0px 0px 0px;
+}
+
+.company-card-image {
+    padding: 58px 20px;
+    position: relative;
+    text-align: center;
+}
+
+</style>
+
+{% endblock %}

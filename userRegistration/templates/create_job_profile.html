@@ -19,7 +19,11 @@
 	<div class="row">
 		<div class="col-sm-12">
             <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-1">
+                    </div>
+                    <div class="col-sm-5">
+                        <h4 style="    margin-bottom: 8%;color: #d26e13;">Job Profile</h4>
+
                         <div class="row">
                             <div class="form-group">
                                 <label for="form-register-email">Job Title</label>
@@ -60,13 +64,6 @@
                                 {{job_details_form.salary_max.errors}}
                             </div><!-- /.form-group -->
                         </div><!-- /.row -->
-
-
-
-
-
-
-
 
                         <div class="row">
                             <div class="form-group ">
@@ -115,7 +112,64 @@
 
                     </div><!-- /.col-* -->
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-1">
+                    </div>
+
+                    <div class="col-sm-5">
+                        <h4 style="    margin-bottom: 8%;color: #d26e13;">Campaign Details</h4>
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label for="form-register-first-name">First Name</label>
+                                        {{cmpny_form.first_name}}
+                                        {{cmpny_form.first_name.errors}}
+                                    </div><!-- /.form-group -->
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="form-login-surname">Last Name</label>
+                                        {{cmpny_form.last_name}}
+                                        {{cmpny_form.last_name.errors}}
+                                    </div><!-- /.form-group -->
+
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="form-login-surname">Last Name</label>
+                                        {{cmpny_form.last_name}}
+                                        {{cmpny_form.last_name.errors}}
+                                    </div><!-- /.form-group -->
+
+
+                                </div><!-- /.row -->
+                                </div><!-- /.company-card -->
+                            </div><!-- /.col-* -->
+
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="form-group col-sm-8">
+                                            <label for="form-register-first-name">Candidates from all over UK</label>
+                                            {{cmpny_form.first_name}}
+                                            {{cmpny_form.first_name.errors}}
+                                        </div><!-- /.form-group -->
+
+                                        <div class="form-group col-sm-4">
+                                            <label for="form-login-surname">Only from Job Locations</label>
+                                            {{cmpny_form.last_name}}
+                                            {{cmpny_form.last_name.errors}}
+                                        </div><!-- /.form-group -->
+
+
+                                    </div><!-- /.row -->
+                                    </div><!-- /.company-card -->
+                                </div><!-- /.col-* -->
+
+
+
+                        </div>
+
+
 
 
                     </div><!-- /.col-* -->
@@ -128,7 +182,13 @@
 
 <style type="text/css">
     
+.company-card-image {
+    padding: 20px 30px;
+}
 
+.company-card {
+    margin: 0px 0px 0px 0px;
+}
 
 
 
