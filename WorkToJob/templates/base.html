@@ -50,19 +50,16 @@
                 <ul class="header-nav nav nav-pills collapse" style="float: right">
 
                     {% if user.is_authenticated %}
-                    
+                        <li>
+                            <a href="#">{{user.first_name|title}} {{user.last_name|title}} <i class="fa fa-chevron-down"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="{% url 'logout' %}?next=/accounts/login">Logout</a></li>
+                            </ul>
+                        </li>
                     {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'register_company_profile' %}">Sign Up</a></li>
                     {% endif %}
-                    <li>
-                        <a href="#">{{user.first_name|title}} {{user.last_name|title}} <i class="fa fa-chevron-down"></i></a>
-                        <ul class="sub-menu">
-                            <li><a href="pricing.html">Pricing</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="{% url 'logout' %}?next=/accounts/login">Logout</a></li>
-                        </ul>
-                    </li>
+
                     <li><a href="#" class="primary">Help</a></li>
                     <li><a href="#" class="primary"><i class="fa fa-search" aria-hidden="true" style="font-size: 20px;"></i></a></li>
                 </ul><!-- /.header-actions -->

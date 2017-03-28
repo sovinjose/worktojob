@@ -11,15 +11,15 @@
 
 
 <div class="row">
-    <div class="col-sm-12">
 
 
-        <form method="post" action='{% url "register_company_profile" %}'>{% csrf_token %}
-            <div role="tabpanel" class="tab-pane active" id="personal">
-                <div class="row">
+        
                     <div class="col-sm-3">
                     </div>
                     <div class="col-sm-6">
+
+
+                        <form method="post" action='{% url "register_company_profile" %}'>{% csrf_token %}
 
 
                         <div class="row">
@@ -55,31 +55,17 @@
                         </div><!-- /.form-group -->
 
 
+
+
+                        <div class="center">
+                            <button type="submit" class="btn btn-secondary">Create an Account</button>
+                        </div><!-- /.center -->
+                        </form>
+
                     </div><!-- /.col-* -->
 
 
-
-                </div><!-- /.row -->
-
-
-
-
-
-
-
-
-
-
-                <div class="center">
-                    <div class="checkbox checkbox-info">
-                        <label><input type="checkbox"> By signing up, you agree with the <a href="#">terms and conditions</a></label>
-                    </div><!-- /.checkbox -->
-
-                    <button type="submit" class="btn btn-secondary">Create an Account</button>
-                </div><!-- /.center -->
-            </div><!-- /.tab-pane -->
-            </form>
-    </div><!-- /.col-* -->
+            
 </div><!-- /.row -->
 
 <style type="text/css">
