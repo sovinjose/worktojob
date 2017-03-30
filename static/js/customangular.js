@@ -68,8 +68,6 @@ ruckusTool.controller("CreateProfileTab1Controeller", function($scope, $http, $l
 
 ruckusTool.controller("CreateProfileTab2Controeller", function($scope, $http, $location) {
 
-
-
     $scope.tabActiveStatus['first'] = false
     $scope.tabActiveStatus['second'] = true
 
@@ -100,6 +98,7 @@ ruckusTool.controller("CreateProfileTab3Controeller", function($scope, $http, $l
     $location.url('/view3');
 })
 
+ruckusTool.controller("CreateJobProfileControeller", function($scope, $http, $location) {});
 
 
 

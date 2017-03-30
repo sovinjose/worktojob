@@ -104,8 +104,17 @@ class OpeningDetailsForm(ModelForm):
         self.fields['job_description'].widget.attrs.update({'class' : "form-control"})
         self.fields['job_location'].widget.attrs.update({'class' : "form-control"})
         self.fields['job_start_date'].widget.attrs.update({'class' : "form-control"})
-        self.fields['job_end_date'].widget.attrs.update({'class' : "form-control"})
+        #self.fields['job_end_date'].widget.attrs.update({'class' : "form-control"})
         self.fields['job_profile'].widget.attrs.update({'class' : "form-control"})
+        self.fields['salary_min'].widget.attrs.update({'class' : "form-control"})
+        self.fields['salary_max'].widget.attrs.update({'class' : "form-control"})
+
+        self.fields['job_description'].widget.attrs['cols'] = 10
+        self.fields['job_description'].widget.attrs['rows'] = 5
+        self.fields['job_description'].widget.attrs['placeholder'] = 'Max. 300 characters'
+
+        self.fields['job_profile'].widget.attrs['cols'] = 10
+        self.fields['job_profile'].widget.attrs['rows'] = 15
 
         #self.fields['Keywords'].widget.attrs.update({'class' : "form-control"})
         # self.fields['number_of_vacancies'].widget.attrs.update({'class' : "form-control"})

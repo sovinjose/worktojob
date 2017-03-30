@@ -20,9 +20,28 @@
     </div>
 </div>
 
+
 <div class="row">
+{% for obj in cmp_obj %}
+    <div class="col-sm-3">
+        <div class="company-card" style="background-color: #fff;">
+            <div class="company-card-image1" style="padding: 5%;">
+                <h3 style="font-size: 18px;font-weight:600;"> {{obj.job_title}}</h3>
+                <p> £{{obj.salary_min}},000 - £{{obj.salary_max}},000</p>
+                <p> opening till at {{obj.job_start_date}}</p>
+
+                <h3 style="font-size: 16px;font-weight:600; color:green"> 78 Candidates</h3>
 
 
+
+                <div class="center" >
+                    <button type="submit" class="btn" style="border-radius: 24px;background-color: #ed7631;">VIEW  CANDIDATES</button>
+                </div><!-- /.center -->
+                
+            </div><!-- /.company-card-image -->
+        </div><!-- /.company-card -->
+    </div><!-- /.col-* -->
+{% endfor %}
 
     <div class="col-sm-2">
 		<div class="company-card" style="background-color: #fff;">

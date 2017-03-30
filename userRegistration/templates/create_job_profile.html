@@ -14,100 +14,98 @@
 
 {% block pageContent %}
 
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<link rel="stylesheet" href="{% static 'libraries/datepicker/css/bootstrap-datepicker.css' %}" />
+<script src="{% static 'libraries/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+
 <div ng-controller="CreateJobProfileControeller">
 
 	<div class="row">
 		<div class="col-sm-12">
+            <form method="post" action='{% url "create_new_job" %}'>{% csrf_token %}
             <div class="row">
                     <div class="col-sm-1">
                     </div>
                     <div class="col-sm-5">
-                        <h4 style="    margin-bottom: 8%;color: #d26e13;">Job Profile</h4>
-
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="form-register-email">Job Title</label>
-                                {{job_details_form.job_title}}
-                                {{job_details_form.job_title.errors}}
-                            </div><!-- /.form-group -->
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group ">
-                                <label for="form-register-first-name">Department</label>
-                                {{job_details_form.department}}
-                                {{job_details_form.department.errors}}
-                            </div><!-- /.form-group -->
-                        </div><!-- /.row -->
+                        <h4 style="    margin-bottom: 4%;color: #d26e13;">Job Profile</h4>
 
 
-                        <div class="row">
-                            <div class="form-group ">
-                                <label for="form-register-first-name">Job Type</label>
-                                {{job_details_form.job_type}}
-                                {{job_details_form.job_type.errors}}
-                            </div><!-- /.form-group -->
-                        </div><!-- /.row -->
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label for="form-register-email">Job Title</label>
+                                    {{job_details_form.job_title}}
+                                    {{job_details_form.job_title.errors}}
+                                </div><!-- /.form-group -->
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label for="form-register-first-name">Department</label>
+                                    {{job_details_form.department}}
+                                    {{job_details_form.department.errors}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
+
+                            <div class="row">
+                                <label class=" col-sm-3" style="margin-top: 6%;">Salary Range</label>
+                                <div class="form-group col-sm-4">
+                                    <label for="form-register-first-name">Min</label>
+                                    {{job_details_form.salary_min}}
+                                    {{job_details_form.salary_min.errors}}
+                                </div><!-- /.form-group -->
+                                <label class=" col-sm-1" style="margin-top: 6%";>to</label>
+                                <div class="form-group col-sm-4">
+                                    <label for="form-login-surname">Max</label>
+                                    {{job_details_form.salary_min}}
+                                    {{job_details_form.salary_max.errors}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
 
 
-                        <div class="row">
-                            <label class=" col-sm-3" style="margin-top: 6%;">Salary Range</label>
-                            <div class="form-group col-sm-2">
-                                <label for="form-register-first-name">Min</label>
-                                {{job_details_form.salary_min}}
-                                {{job_details_form.salary_min.errors}}
-                            </div><!-- /.form-group -->
-                            <label class=" col-sm-1" style="margin-top: 6%;">to</label>
-                            <div class="form-group col-sm-2">
-                                <label for="form-login-surname">Max</label>
-                                {{job_details_form.salary_min}}
-                                {{job_details_form.salary_max.errors}}
-                            </div><!-- /.form-group -->
-                        </div><!-- /.row -->
-
-                        <div class="row">
-                            <div class="form-group ">
-                                <label for="form-register-first-name">Job Description</label>
-                                {{job_details_form.job_description}}
-                                {{job_details_form.job_description.errors}}
-                            </div><!-- /.form-group -->
-                        </div><!-- /.row -->
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label for="form-register-first-name">Job Type</label>
+                                    {{job_details_form.job_type}}
+                                    {{job_details_form.job_type.errors}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
 
 
-                        <div class="row">
-                            <div class="form-group ">
-                                <label for="form-register-first-name">Job Location</label>
-                                {{job_details_form.job_location}}
-                                {{job_details_form.job_location.errors}}
-                            </div><!-- /.form-group -->
-                        </div><!-- /.row -->
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label for="form-register-first-name">Job Start Date</label>
+                                    
+                                    <div class="input-group input-append date" id="startDatePicker">
+                                        {{job_details_form.job_start_date}}
+                                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+
+                                    {{job_details_form.job_start_date.errors}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
+
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label for="form-register-first-name">Job Location</label>
+                                    {{job_details_form.job_location}}
+                                    {{job_details_form.job_location.errors}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
 
 
-                        <div class="row">
-                            <div class="form-group ">
-                                <label for="form-register-first-name">Job Start Date</label>
-                                {{job_details_form.job_start_date}}
-                                {{job_details_form.job_start_date.errors}}
-                            </div><!-- /.form-group -->
-                        </div><!-- /.row -->
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label for="form-register-first-name">Job Description</label>
+                                    {{job_details_form.job_description}}
+                                    {{job_details_form.job_description.errors}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
 
 
-                        <div class="row">
-                            <div class="form-group ">
-                                <label for="form-register-first-name">Job End Date</label>
-                                {{job_details_form.job_location}}
-                                {{job_details_form.job_location.errors}}
-                            </div><!-- /.form-group -->
-                        </div><!-- /.row -->
-
-
-                        <div class="row">
-                            <div class="form-group ">
-                                <label for="form-register-first-name">Job Profile</label>
-                                {{job_details_form.job_profile}}
-                                {{job_details_form.job_profile.errors}}
-                            </div><!-- /.form-group -->
-                        </div><!-- /.row -->
 
 
                     </div><!-- /.col-* -->
@@ -116,7 +114,7 @@
                     </div>
 
                     <div class="col-sm-5">
-                        <h4 style="    margin-bottom: 8%;color: #d26e13;">Campaign Details</h4>
+                        <h4 style="    margin-bottom: 4%;color: #d26e13;">Campaign Details</h4>
 
                         <div class="row">
                             <div class="col-sm-8">
@@ -159,17 +157,40 @@
                                             {{cmpny_form.last_name}}
                                             {{cmpny_form.last_name.errors}}
                                         </div><!-- /.form-group -->
-
-
                                     </div><!-- /.row -->
+
+
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="company-card" style="background-color: #fff;">
+                                                <div class="company-card-image">
+                                                    
+                                                    
+                                                </div><!-- /.company-card-image -->
+                                            </div><!-- /.company-card -->
+                                        </div><!-- /.col-* -->
+                                    </div>
+
+
+
+
+                        <div class="center" style="margin-top: 13%;">
+                            <button type="submit" class="btn btn-secondary" style="border-radius: 24px;background-color: #ed7631;">Review & Post Job</button>
+                        </div><!-- /.center -->
+
+
+
+
                                     </div><!-- /.company-card -->
                                 </div><!-- /.col-* -->
-
-
-
                         </div>
 
 
+
+
+
+                    </form>
 
 
                     </div><!-- /.col-* -->
@@ -191,12 +212,38 @@
 }
 
 
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 144px;
+}
 
 
+.company-card {
+    border: 1px solid;
+    margin: 0px 0px 0px 0px;
+}
+
+.company-card-image {
+    padding: 58px 20px;
+    position: relative;
+    text-align: center;
+}
 </style>
 
 
 
+<script type="text/javascript">
+    
 
+
+$('#startDatePicker')
+    .datepicker({
+        autoclose: true,    // It is false, by default
+        format: 'mm/dd/yyyy'
+})
+
+
+
+
+</script>
 
 {% endblock %}

@@ -95,8 +95,6 @@ QUALIFICATIONS = (
 MIN_EXPERINCE = ((str(i), str(i)) for i in range(0, 31))
 MAX_EXPERINCE = ((str(i), str(i)) for i in range(0, 31))
 
-
-
 NO_OPENINGS = ((str(i), str(i)) for i in range(0, 20))
 
 
@@ -112,13 +110,13 @@ class OpeningDetails(models.Model):
     job_title = models.CharField(max_length=100)
     department = models.CharField(max_length=100, blank=True, null=True, choices=INDUSTRY_CHOICES)
     job_type = models.CharField(max_length=100, blank=True, null=True, choices=JOB_TYPE)
-    job_description = models.TextField()
+    job_description = models.TextField(blank=True, null=True,)
     job_location = models.CharField(max_length=100)
     job_start_date = models.DateTimeField()
-    job_end_date = models.DateTimeField()
-    job_profile = models.TextField()
-    salary_min = models.CharField(max_length=100, null=True, choices=MIN_EXPERINCE)
-    salary_max = models.CharField(max_length=100, null=True, choices=MAX_EXPERINCE)
+    #job_end_date = models.DateTimeField()
+    job_profile = models.TextField(blank=True, null=True,)
+    salary_min = models.CharField(max_length=100, blank=True, null=True, choices=MIN_EXPERINCE)
+    salary_max = models.CharField(max_length=100, blank=True, null=True, choices=MAX_EXPERINCE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     #Keywords = models.TextField()

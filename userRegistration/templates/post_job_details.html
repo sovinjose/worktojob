@@ -1,0 +1,153 @@
+{% extends 'base.html' %}{% load staticfiles %}
+{% block pageHead %}
+    <h1 class="center">{{cmp_details.name}} Job List</h1>
+{% endblock %}
+
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Create Job Profile</a></li>
+    </ul>
+{% endblock %}
+
+
+{% block pageContent %}
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<link rel="stylesheet" href="{% static 'libraries/datepicker/css/bootstrap-datepicker.css' %}" />
+<script src="{% static 'libraries/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+
+<div ng-controller="CreateJobProfileControeller">
+
+	<div class="row">
+		<div class="col-sm-12">
+            <div class="row">
+                    <div class="col-sm-1">
+                    </div>
+                    <div class="col-sm-5">
+                        <h4 style="    margin-bottom: 8%;color: #d26e13;">Job Profile</h4>
+
+                        <form method="post" action='/jobProfile/{{job_id}}/details'>{% csrf_token %}
+
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label for="form-register-first-name">Job Profile</label>
+                                    <textarea class="form-control" cols="40" id="id_job_profile" name="job_profile" rows="19" required="" style="border: 1px solid #55a747;"></textarea>
+                                    
+                                </div><!-- /.form-group -->
+                            </div>
+
+
+                            <div class="center">
+                            <button type="submit" class="btn btn-secondary" style="border-radius: 24px;background-color: #ed7631;">Post Job Listing</button>
+                            </div><!-- /.center -->
+
+                        </form>
+
+
+                    </div><!-- /.col-* -->
+
+                    <div class="col-sm-1">
+                    </div>
+
+                    <div class="col-sm-5">
+                        <h4 style="    margin-bottom: 8%;color: #d26e13;">Campaign Details</h4>
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label for="form-register-first-name">First Name</label>
+                                        {{cmpny_form.first_name}}
+                                        {{cmpny_form.first_name.errors}}
+                                    </div><!-- /.form-group -->
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="form-login-surname">Last Name</label>
+                                        {{cmpny_form.last_name}}
+                                        {{cmpny_form.last_name.errors}}
+                                    </div><!-- /.form-group -->
+
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="form-login-surname">Last Name</label>
+                                        {{cmpny_form.last_name}}
+                                        {{cmpny_form.last_name.errors}}
+                                    </div><!-- /.form-group -->
+
+
+                                </div><!-- /.row -->
+                                </div><!-- /.company-card -->
+                            </div><!-- /.col-* -->
+
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="form-group col-sm-8">
+                                            <label for="form-register-first-name">Candidates from all over UK1</label>
+                                            {{cmpny_form.first_name}}
+                                            {{cmpny_form.first_name.errors}}
+                                        </div><!-- /.form-group -->
+
+                                        <div class="form-group col-sm-4">
+                                            <label for="form-login-surname">Only from Job Locations</label>
+                                            {{cmpny_form.last_name}}
+                                            {{cmpny_form.last_name.errors}}
+                                        </div><!-- /.form-group -->
+                                    </div><!-- /.row -->
+
+
+                                    </div><!-- /.company-card -->
+                                </div><!-- /.col-* -->
+                        </div>
+                    </div><!-- /.col-* -->
+		</div>
+	</div>
+</div>
+</div>
+
+
+
+<style type="text/css">
+    
+.company-card-image {
+    padding: 20px 30px;
+}
+
+.company-card {
+    margin: 0px 0px 0px 0px;
+}
+
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 144px;
+}
+
+</style>
+
+
+<style type="text/css">
+    
+
+
+.company-card {
+    border: 1px solid #e25e00;
+    border-radius: 17px;
+    margin: 0px 0px 0px 0px;
+}
+
+.company-card-image {
+    padding: 58px 20px;
+    position: relative;
+    text-align: center;
+}
+
+</style>
+
+
+{% endblock %}

@@ -72,8 +72,6 @@ class CreateJobProfileView(View):
         return render(requests, 'create_job_profile.html', context)
 
 
-
-
 class CreateCompanyAccount(View):
 
     def get(self, requests):
@@ -118,10 +116,10 @@ class CreateCompanyAccount(View):
 class CompanyAccountDetails(View):
 
     def get(self, requests):
-        # = CompanyProfile.objects.get(user_profile=requests.user)
-        #openong_details = OpeningDetails.objects.filter(company__user_profile = requests.user)
+        #cmp_obj = CompanyProfile.objects.get(user_profile=requests.user)
+        cmp_obj = OpeningDetails.objects.filter(company__user_profile = requests.user)
         context = {
-            #'cmp_details' : cmp_details,
+            'cmp_obj' : cmp_obj,
             #'openong_details' : openong_details
         }
         return render(requests, 'job_profile_details.html', context)
@@ -137,20 +135,36 @@ class PostNewJob(View):
         return render(requests, 'post_job.html', context)
 
     def post(self, requests):
-        print requests.POST
         form = OpeningDetailsForm(requests.POST)
         if form.is_valid():
             cmp_obj = CompanyProfile.objects.get(user_profile=requests.user)
             form_obj = form.save(commit=False)
             form_obj.company = cmp_obj
             form_obj.save()
-            return HttpResponseRedirect('/company/details')
+            return HttpResponseRedirect('/jobProfile/%s/details' % (form_obj.id))
         else:
             print form.errors
             context = {
                 'form' : form
             }
         return render(requests, 'post_job.html', context)
+
+
+class CompleteJobProfile(View):
+
+    def get(self, requests, pk):
+        context = {
+            'job_id' : pk
+        }
+        return render(requests, 'post_job_details.html', context)
+
+    def post(self, requests, pk):
+        job_profile = requests.POST.get('job_profile')
+        opening_details = OpeningDetails.objects.get(id=pk)
+        opening_details.job_profile = job_profile
+        opening_details.save()
+        return HttpResponseRedirect('/company/details')
+
 
 
 class JobDetails(View):
