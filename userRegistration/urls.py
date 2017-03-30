@@ -36,7 +36,7 @@ urlpatterns = [
 	url(r'^create/user/profile$', CreateUserProfileView.as_view(), name='CreateUserProfileView'),
 	url(r'^update/user/profile$', UpdateUserProfileView.as_view(), name='UpdateUserProfileView'),
 	url(r'^save/profile$', csrf_exempt(SaveUserProfileView.as_view()), name='SaveUserProfileView'),
-	url(r'^create/job/profile$', CreateJobProfileView.as_view(), name='create_job_profile'),
+	url(r'^create/job/profile$', PostNewJob.as_view(), name='create_job_profile'),
 
 	url(r'^jobProfile/(?P<pk>[0-9]+)/details$', CompleteJobProfile.as_view(), name='complete_job_profile'),
 

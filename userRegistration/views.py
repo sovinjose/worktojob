@@ -130,9 +130,9 @@ class PostNewJob(View):
     def get(self, requests):
         form = OpeningDetailsForm()
         context = {
-            'form' : form
+            'job_details_form' : form
         }
-        return render(requests, 'post_job.html', context)
+        return render(requests, 'create_job_profile.html', context)
 
     def post(self, requests):
         form = OpeningDetailsForm(requests.POST)
@@ -145,9 +145,9 @@ class PostNewJob(View):
         else:
             print form.errors
             context = {
-                'form' : form
+                'job_details_form' : form
             }
-        return render(requests, 'post_job.html', context)
+        return render(requests, 'create_job_profile.html', context)
 
 
 class CompleteJobProfile(View):

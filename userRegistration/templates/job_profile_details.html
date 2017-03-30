@@ -23,7 +23,7 @@
 
 <div class="row">
 {% for obj in cmp_obj %}
-    <div class="col-sm-3">
+    <div class="col-sm-3" style="margin-top: 1%;">
         <div class="company-card" style="background-color: #fff;">
             <div class="company-card-image1" style="padding: 5%;">
                 <h3 style="font-size: 18px;font-weight:600;"> {{obj.job_title}}</h3>
@@ -43,7 +43,7 @@
     </div><!-- /.col-* -->
 {% endfor %}
 
-    <div class="col-sm-2">
+    <div class="col-sm-2" style="margin-top: 1%;">
 		<div class="company-card" style="background-color: #fff;">
 		    <div class="company-card-image">
 		        <a href="{% url 'create_job_profile' %}"><i class="fa fa-plus fa-3x" style="color: #ccc;"></i></a>
