@@ -167,6 +167,21 @@ class CompleteJobProfile(View):
 
 
 
+
+class EmployeJobDetails(View):
+
+    def get(self, requests, pk):
+        opening_details = OpeningDetails.objects.get(id=pk)
+        context = {
+            'opening_details': opening_details
+        }
+        return render(requests, 'employee_list.html', context)
+
+
+
+
+
+
 class JobDetails(View):
 
     def get(self, requests, pk):

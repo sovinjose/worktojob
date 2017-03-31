@@ -26,13 +26,13 @@
 
 	<div class="row">
 		<div class="col-sm-12">
+            <form method="post" action='/jobProfile/{{job_id}}/details'>{% csrf_token %}
             <div class="row">
                     <div class="col-sm-1">
                     </div>
                     <div class="col-sm-5">
                         <h4 style="    margin-bottom: 8%;color: #d26e13;">Job Profile</h4>
 
-                        <form method="post" action='/jobProfile/{{job_id}}/details'>{% csrf_token %}
 
                             <div class="row">
                                 <div class="form-group col-sm-12">
@@ -41,71 +41,34 @@
                                     
                                 </div><!-- /.form-group -->
                             </div>
-
-
-                            <div class="center">
-                            <button type="submit" class="btn btn-secondary" style="border-radius: 24px;background-color: #ed7631;">Post Job Listing</button>
-                            </div><!-- /.center -->
-
-                        </form>
-
-
                     </div><!-- /.col-* -->
 
-                    <div class="col-sm-1">
-                    </div>
+                        <div class="col-sm-1">
+                        </div>
 
-                    <div class="col-sm-5">
-                        <h4 style="    margin-bottom: 8%;color: #d26e13;">Campaign Details</h4>
+                        <div class="col-sm-2">
 
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <div class="row">
-                                    <div class="form-group col-sm-4">
-                                        <label for="form-register-first-name">First Name</label>
-                                        {{cmpny_form.first_name}}
-                                        {{cmpny_form.first_name.errors}}
-                                    </div><!-- /.form-group -->
+                            <div class="row" style="margin-top: 50%;">
+                                <div class="logo-baner">
+                                    <div class="logo-image">
+                                        LOGO BANNER
+                                    </div><!-- /.company-card-image -->
+                                    <div class="company-card-data">
 
-                                    <div class="form-group col-sm-4">
-                                        <label for="form-login-surname">Last Name</label>
-                                        {{cmpny_form.last_name}}
-                                        {{cmpny_form.last_name.errors}}
-                                    </div><!-- /.form-group -->
-
-
-                                    <div class="form-group col-sm-4">
-                                        <label for="form-login-surname">Last Name</label>
-                                        {{cmpny_form.last_name}}
-                                        {{cmpny_form.last_name.errors}}
-                                    </div><!-- /.form-group -->
-
-
-                                </div><!-- /.row -->
-                                </div><!-- /.company-card -->
+                                    </div><!-- /.company-card-data -->
+                                </div>
                             </div><!-- /.col-* -->
 
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <div class="row">
-                                        <div class="form-group col-sm-8">
-                                            <label for="form-register-first-name">Candidates from all over UK1</label>
-                                            {{cmpny_form.first_name}}
-                                            {{cmpny_form.first_name.errors}}
-                                        </div><!-- /.form-group -->
 
-                                        <div class="form-group col-sm-4">
-                                            <label for="form-login-surname">Only from Job Locations</label>
-                                            {{cmpny_form.last_name}}
-                                            {{cmpny_form.last_name.errors}}
-                                        </div><!-- /.form-group -->
-                                    </div><!-- /.row -->
+                            <div class="center" style="margin-top: 10%">
+                                <button type="submit" class="btn btn-secondary" style="border-radius: 24px;background-color: #ed7631;">Post Job Listing</button>
+                            </div><!-- /.center -->
 
 
-                                    </div><!-- /.company-card -->
-                                </div><!-- /.col-* -->
+
                         </div>
                     </div><!-- /.col-* -->
+                </form>
 		</div>
 	</div>
 </div>
@@ -114,6 +77,27 @@
 
 
 <style type="text/css">
+
+
+.logo-baner {
+    border: 1px solid;
+    margin: 0px 0px 0px 0px;
+}
+
+.logo-image {
+    padding: 18px 8px;
+    position: relative;
+    text-align: center;
+    background-color: #337ab7;
+    color: white;
+}
+
+.company-card-data {
+    background-color: #f7f7f7;
+    border-top: 1px solid #e9e9e9;
+    padding: 132px 20px;
+}
+
     
 .company-card-image {
     padding: 20px 30px;

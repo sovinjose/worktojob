@@ -6,7 +6,7 @@
 
 {% block breadcrumb %}
     <ul class="breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="#">Create Job Profile</a></li>
     </ul>
 {% endblock %}
@@ -15,11 +15,14 @@
 {% block pageContent %}
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-
 <link rel="stylesheet" href="{% static 'libraries/datepicker/css/bootstrap-datepicker.css' %}" />
 <script src="{% static 'libraries/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
-
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+
+<!-- gauge.js -->
+<script src="{% static 'plugins/gauge-js/gauge.min.js' %}"></script>
+
 
 
 <div ng-controller="CreateJobProfileControeller">
@@ -114,28 +117,28 @@
                     </div>
 
                     <div class="col-sm-5">
-                        <h4 style="    margin-bottom: 4%;color: #d26e13;">Campaign Details</h4>
+                        <h4 style=" margin-bottom: 4%;color: #d26e13;">Campaign Details</h4>
 
                         <div class="row">
                             <div class="col-sm-8">
                                 <div class="row">
                                     <div class="form-group col-sm-4">
-                                        <label for="form-register-first-name">First Name</label>
-                                        {{cmpny_form.first_name}}
-                                        {{cmpny_form.first_name.errors}}
+                                       <div class="small-box">
+                                            <div class="center" style="margin-top: 1%;">Start Date</div>
+                                        </div>
                                     </div><!-- /.form-group -->
 
                                     <div class="form-group col-sm-4">
-                                        <label for="form-login-surname">Last Name</label>
-                                        {{cmpny_form.last_name}}
-                                        {{cmpny_form.last_name.errors}}
+                                       <div class="small-box">
+                                            <div class="center" style="margin-top: 1%;">End Date</div>
+                                        </div>
                                     </div><!-- /.form-group -->
 
 
                                     <div class="form-group col-sm-4">
-                                        <label for="form-login-surname">Last Name</label>
-                                        {{cmpny_form.last_name}}
-                                        {{cmpny_form.last_name.errors}}
+                                        <div class="small-box">
+                                            <div class="center" style="margin-top: 1%;">28 days</div>
+                                        </div>
                                     </div><!-- /.form-group -->
 
 
@@ -147,43 +150,49 @@
                                 <div class="col-sm-8">
                                     <div class="row">
                                         <div class="form-group col-sm-8">
-                                            <label for="form-register-first-name">Candidates from all over UK</label>
-                                            {{cmpny_form.first_name}}
-                                            {{cmpny_form.first_name.errors}}
+
+                                            <div class="small-box">
+                                                <div class="center" style="margin-top: 1%;">Candidates from all over UK</div>
+                                            </div>
                                         </div><!-- /.form-group -->
 
                                         <div class="form-group col-sm-4">
-                                            <label for="form-login-surname">Only from Job Locations</label>
-                                            {{cmpny_form.last_name}}
-                                            {{cmpny_form.last_name.errors}}
+                                            <div class="small-box">
+                                                <div class="center" style="margin-top: 1%;">Only from Job Locations</div>
+                                            </div>
                                         </div><!-- /.form-group -->
                                     </div><!-- /.row -->
 
 
 
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="company-card" style="background-color: #fff;">
-                                                <div class="company-card-image">
-                                                    
-                                                    
-                                                </div><!-- /.company-card-image -->
-                                            </div><!-- /.company-card -->
-                                        </div><!-- /.col-* -->
+                                    <div class="row" style="margin-top: 25%; border: 1px solid;border-color: #73b5ee;background-color: white;">
+                                        <div class="col-sm-12" style="margin-top: 5%;    margin-bottom: 3%;">
+                                            <div class="col-sm-5">
+                                                <div id="preview">
+                                                    <canvas width="162" height="44" id="canvas-preview" style="width: 162px; height: 44px;margin-left: -35%!important;"></canvas>
+                                                  </div>
+                                                
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <p> your audiance selection is fairly broad
+                                            </div>
+                                        </div><!-- /.company-card -->
+                                        <div class="col-sm-12" style="margin-bottom: 1%;">
+                                            <div class="small-box" style="font-weight: bold;">
+                                                <div class="center" style="margin-top: 1%;">170 Potential Candidates
+</div>
+                                            </div>
+                                            <p class="center" style="margin-top: 2%;"> This is only an estimate. Numbers shown are based on the latest available data, from your selected criteria. </p>
+                                        </div>
                                     </div>
 
+                                    <div class="center" style="margin-top: 13%;">
+                                        <button type="submit" class="btn btn-secondary" style="border-radius: 24px;background-color: #ed7631;">Review & Post Job</button>
+                                    </div><!-- /.center -->
 
 
-
-                        <div class="center" style="margin-top: 13%;">
-                            <button type="submit" class="btn btn-secondary" style="border-radius: 24px;background-color: #ed7631;">Review & Post Job</button>
-                        </div><!-- /.center -->
-
-
-
-
-                                    </div><!-- /.company-card -->
-                                </div><!-- /.col-* -->
+                                </div><!-- /.company-card -->
+                            </div><!-- /.col-* -->
                         </div>
 
 
@@ -200,6 +209,36 @@
 </div>
 
 
+<script type="text/javascript">
+     $(document).ready(function() {
+
+        var opts = {
+          angle: -0.02, // The span of the gauge arc
+          lineWidth: 0.14, // The line thickness
+          radiusScale: 1, // Relative radius
+          pointer: {
+            length: 0.35, // // Relative to gauge radius
+            strokeWidth: 0.033, // The thickness
+            color: '#2A3269' // Fill color
+          },
+          limitMax: false,     // If false, the max value of the gauge will be updated if value surpass max
+          limitMin: false,     // If true, the min value of the gauge will be fixed unless you set it manually
+          colorStart: '#CACF3C',   // Colors
+          colorStop: '#8FC0DA',    // just experiment with them
+          strokeColor: '#E0E0E0',  // to see which ones work best for you
+          generateGradient: true,
+          highDpiSupport: true     // High resolution support
+        };
+        var target = document.getElementById('canvas-preview'); // your canvas element
+        var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+        gauge.maxValue = 3000; // set max gauge value
+        gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+        gauge.animationSpeed = 35; // set animation speed (32 is default value)
+        gauge.set(375); // set actual value
+
+        
+    });
+</script>
 
 <style type="text/css">
     
@@ -227,6 +266,14 @@
     position: relative;
     text-align: center;
 }
+
+.small-box {
+    border: 1px solid;
+    padding: 5%;
+    background-color: white;
+}
+
+
 </style>
 
 
@@ -235,11 +282,8 @@
     
 
 
-$('#startDatePicker')
-    .datepicker({
-        autoclose: true,    // It is false, by default
-        format: 'mm/dd/yyyy'
-})
+$('#id_job_start_date').datepicker({
+    })
 
 
 

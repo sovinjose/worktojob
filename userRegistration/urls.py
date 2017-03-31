@@ -19,7 +19,7 @@ from django.views.decorators.csrf import csrf_exempt
 from views import ( HomeView, CreateUserProfileView, CreateCompanyAccount, 
 								CompanyAccountDetails, PostNewJob, JobDetails, CloseJobStatus,
 								CompanyJobListView, GetUserProfileView, UpdateUserProfileView, 
-								SaveUserProfileView, CreateJobProfileView, CompleteJobProfile)
+								SaveUserProfileView, CreateJobProfileView, CompleteJobProfile, EmployeJobDetails)
 
 urlpatterns = [
 
@@ -39,6 +39,9 @@ urlpatterns = [
 	url(r'^create/job/profile$', PostNewJob.as_view(), name='create_job_profile'),
 
 	url(r'^jobProfile/(?P<pk>[0-9]+)/details$', CompleteJobProfile.as_view(), name='complete_job_profile'),
+
+	url(r'^employee/(?P<pk>[0-9]+)/job/list$', EmployeJobDetails.as_view(), name='employee_job_list'),
+
 
 
 
