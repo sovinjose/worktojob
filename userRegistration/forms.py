@@ -62,13 +62,13 @@ class UserForm(ModelForm):
 
     def clean_password(self):
         password = self.cleaned_data.get('password')
-        password2 = self.cleaned_data.get('password2')
+        #password2 = self.cleaned_data.get('password2')
 
         # At least MIN_LENGTH long
         if len(password) < 3:
             raise forms.ValidationError("The password must be at least %d characters long." % 4)
-        if not password2 or password2 != password:
-            raise forms.ValidationError("Passwords don't match")
+        #if not password2 or password2 != password:
+        #    raise forms.ValidationError("Passwords don't match")
         return password
 
 
