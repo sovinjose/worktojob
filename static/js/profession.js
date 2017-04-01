@@ -54,12 +54,7 @@ $(document).ready(function() {
 	/**
 	 * Bootstrap select
 	 */
-	$('select').selectpicker({
-		style: 'btn',
-		template: {
-      		caret: '<i class="fa fa-chevron-down"></i>'
-    	},
-	});
+
 
 	/**
 	 * Bootstrap wysiwyg

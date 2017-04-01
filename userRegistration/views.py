@@ -9,30 +9,31 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.forms.models import model_to_dict
 
-from .forms import UserProfileForm, CompanyProfileForm, OpeningDetailsForm, UpdateCompanyProfileForm, CreateCompanyProfileForm
+from .forms import (UserProfileForm, CompanyProfileForm, OpeningDetailsForm, 
+                            UpdateCompanyProfileForm, UserForm)
 from. models import CompanyProfile, OpeningDetails
 
 
 class HomeView(View):
 
-    def get(self, requests):
+    def get(self, request):
         return HttpResponseRedirect('/company/details')
 
 
 class GetUserProfileView(View):
-    def get(self, requests):
+    def get(self, request):
         context = {
             'cmpny_form' : CompanyProfileForm()
         }
-        return render(requests, 'create_user_profile.html', context)
+        return render(request, 'create_user_profile.html', context)
 
 
 class CreateUserProfileView(View):
-    def post(self, requests):
-        cmpny_form = CompanyProfileForm(json.loads(requests.body))
+    def post(self, request):
+        cmpny_form = CompanyProfileForm(json.loads(request.body))
         if cmpny_form.is_valid():
             form_obj = cmpny_form.save(commit=False)
-            form_obj.user_profile=requests.user
+            form_obj.user_profile=request.user
             form_obj.save()
             status = True
         else:
@@ -42,11 +43,11 @@ class CreateUserProfileView(View):
 
 
 class UpdateUserProfileView(View):
-    def post(self, requests):
-        d_obj = json.loads(requests.body)
+    def post(self, request):
+        d_obj = json.loads(request.body)
         form = CompanyProfileForm(d_obj)
         if form.is_valid():
-            CompanyProfile.objects.filter(user_profile=requests.user).update(**d_obj)
+            CompanyProfile.objects.filter(user_profile=request.user).update(**d_obj)
             status = True
         else:
             status = False
@@ -65,79 +66,71 @@ class SaveUserProfileView(UpdateView):
 
 class CreateJobProfileView(View):
 
-    def get(self, requests):
+    def get(self, request):
         context = {
             'job_details_form' : OpeningDetailsForm()
         }
-        return render(requests, 'create_job_profile.html', context)
+        return render(request, 'create_job_profile.html', context)
 
 
 class CreateCompanyAccount(View):
 
-    def get(self, requests):
-        cmpny_form = CreateCompanyProfileForm()
+    def get(self, request):
+        form = UserForm()
         context = {
-            'cmpny_form' : cmpny_form
+            'form' : form
         }
-        return render(requests, 'user_registration.html', context)
+        return render(request, 'user_registration.html', context)
 
-    def post(self, requests):
-        email = requests.POST.get('email', None)
-        password = requests.POST.get('password', None)
-        password2 = requests.POST.get('password2', None)
-        #try:
-        if email and password:
-            #cmpny_form = CompanyProfileForm(requests.POST)
-            #if cmpny_form.is_valid():
-            user = User.objects.create_user(
-                                username=email,
-                                password=password,
-                                first_name=requests.POST.get('first_name'),
-                                last_name=requests.POST.get('last_name'),
-                                email=email
-                            )
-                #cmp_frm = cmpny_form.save(commit=False)
-                #cmp_frm.user_profile = user
-                #cmp_frm.save()
-            messages.add_message(requests, messages.INFO, 'successfully crested the user')
-            user = authenticate(username=email, password=password)
-            login(requests, user)
+    def post(self, request):        
+        form = UserForm(request.POST)
+        if form.is_valid():
+            password = request.POST['password']
+            dictToSave = {
+                'email': form.cleaned_data['email'],
+                'first_name': form.cleaned_data['first_name'],
+                'last_name': form.cleaned_data['last_name']
+            }
+            new_user = User.objects.create_user(
+                username=form.cleaned_data['email'],password=password,
+                **dictToSave
+            )
+            user = authenticate(username=new_user.username, password=password)
+            if user is not None:
+                login(request, user)
             return HttpResponseRedirect('/home')
         else:
-            messages.add_message(requests, messages.ERROR, 'Please enter Email And Apssword.')
-        #except Exception as e:
-        #    messages.add_message(requests, messages.ERROR, e.message)
-        context = {
-            'cmpny_form' : CreateCompanyProfileForm(requests.POST)
-        }
-        return render(requests, 'user_registration.html', context)
+            context = {
+                'form' : UserForm(request.POST)
+            }
+            return render(request, 'user_registration.html', context)
 
 
 class CompanyAccountDetails(View):
 
-    def get(self, requests):
-        #cmp_obj = CompanyProfile.objects.get(user_profile=requests.user)
-        cmp_obj = OpeningDetails.objects.filter(company__user_profile = requests.user)
+    def get(self, request):
+        #cmp_obj = CompanyProfile.objects.get(user_profile=request.user)
+        cmp_obj = OpeningDetails.objects.filter(company__user_profile = request.user)
         context = {
             'cmp_obj' : cmp_obj,
             #'openong_details' : openong_details
         }
-        return render(requests, 'job_profile_details.html', context)
+        return render(request, 'job_profile_details.html', context)
 
 
 class PostNewJob(View):
 
-    def get(self, requests):
+    def get(self, request):
         form = OpeningDetailsForm()
         context = {
             'job_details_form' : form
         }
-        return render(requests, 'create_job_profile.html', context)
+        return render(request, 'create_job_profile.html', context)
 
-    def post(self, requests):
-        form = OpeningDetailsForm(requests.POST)
+    def post(self, request):
+        form = OpeningDetailsForm(request.POST)
         if form.is_valid():
-            cmp_obj = CompanyProfile.objects.get(user_profile=requests.user)
+            cmp_obj = CompanyProfile.objects.get(user_profile=request.user)
             form_obj = form.save(commit=False)
             form_obj.company = cmp_obj
             form_obj.save()
@@ -147,19 +140,19 @@ class PostNewJob(View):
             context = {
                 'job_details_form' : form
             }
-        return render(requests, 'create_job_profile.html', context)
+        return render(request, 'create_job_profile.html', context)
 
 
 class CompleteJobProfile(View):
 
-    def get(self, requests, pk):
+    def get(self, request, pk):
         context = {
             'job_id' : pk
         }
-        return render(requests, 'post_job_details.html', context)
+        return render(request, 'post_job_details.html', context)
 
-    def post(self, requests, pk):
-        job_profile = requests.POST.get('job_profile')
+    def post(self, request, pk):
+        job_profile = request.POST.get('job_profile')
         opening_details = OpeningDetails.objects.get(id=pk)
         opening_details.job_profile = job_profile
         opening_details.save()
@@ -170,12 +163,12 @@ class CompleteJobProfile(View):
 
 class EmployeJobDetails(View):
 
-    def get(self, requests, pk):
+    def get(self, request, pk):
         opening_details = OpeningDetails.objects.get(id=pk)
         context = {
             'opening_details': opening_details
         }
-        return render(requests, 'employee_list.html', context)
+        return render(request, 'employee_list.html', context)
 
 
 
@@ -184,17 +177,17 @@ class EmployeJobDetails(View):
 
 class JobDetails(View):
 
-    def get(self, requests, pk):
+    def get(self, request, pk):
         opng_details = OpeningDetails.objects.get(id=pk)
         context = {
             'opng_details' : opng_details
         }
-        return render(requests, 'job_details.html', context)
+        return render(request, 'job_details.html', context)
 
 
 class CloseJobStatus(View):
 
-    def post(self, requests, pk):
+    def post(self, request, pk):
         opng_details = OpeningDetails.objects.get(id=pk)
         opng_details.active_status = False
         opng_details.save()
@@ -203,14 +196,14 @@ class CloseJobStatus(View):
 
 class CompanyJobListView(View):
 
-    def get(self, requests):
-        cmp_details = CompanyProfile.objects.get(user_profile=requests.user)
+    def get(self, request):
+        cmp_details = CompanyProfile.objects.get(user_profile=request.user)
         opng_details = OpeningDetails.objects.all()
         context = {
             'opng_details' : opng_details,
             'cmp_details' : cmp_details
         }
-        return render(requests, 'company_job_list.html', context)
+        return render(request, 'company_job_list.html', context)
 
 
 

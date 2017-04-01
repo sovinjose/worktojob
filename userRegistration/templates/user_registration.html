@@ -25,14 +25,14 @@
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <label for="form-register-first-name">First Name</label>
-                                {{cmpny_form.first_name}}
-                                {{cmpny_form.first_name.errors}}
+                                {{form.first_name}}
+                                {{form.first_name.errors}}
                             </div><!-- /.form-group -->
 
                             <div class="form-group col-sm-6">
                                 <label for="form-login-surname">Last Name</label>
-                                {{cmpny_form.last_name}}
-                                {{cmpny_form.last_name.errors}}
+                                {{form.last_name}}
+                                {{form.last_name.errors}}
                             </div><!-- /.form-group -->
                         </div><!-- /.row -->
 
@@ -40,18 +40,19 @@
 
                         <div class="form-group">
                             <label for="form-register-email">E-mail</label>
-                            {{cmpny_form.email}}
-                            {{cmpny_form.email.errors}}
+                            {{form.email}}
+                            {{form.email.errors}}
                         </div><!-- /.form-group -->
 
                         <div class="form-group">
                             <label for="form-register-password">Password</label>
                             <input type="password" name="password" class="form-control" id="form-register-password">
+                            {{form.password.errors}}
                         </div><!-- /.form-group -->
 
                         <div class="form-group">
                             <label for="form-register-retype">Retype</label>
-                            <input type="password" name="password2" class="form-control" id="form-register-retype">
+                            {{form.password2}}
                         </div><!-- /.form-group -->
 
 

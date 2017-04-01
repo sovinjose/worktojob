@@ -11,18 +11,65 @@ class UserProfileForm(ModelForm):
         model = UserProfile
         exclude = ['user']
 
+class UserForm(ModelForm):
 
-class CreateCompanyProfileForm(ModelForm):
+    password2=forms.CharField()
 
     class Meta:
-        model = CompanyProfile
-        fields = ['last_name', 'first_name', 'email']
+        model = User
+        fields = ('last_name', 'first_name', 'email', 'password')
 
     def __init__(self, *args, **kwargs):
-        super(CreateCompanyProfileForm, self).__init__(*args, **kwargs)
+        super(UserForm, self).__init__(*args, **kwargs)
         self.fields['last_name'].widget.attrs.update({'class' : "form-control", "ng-model":"formData.last_name"})
         self.fields['first_name'].widget.attrs.update({'class' : "form-control", "ng-model":"formData.first_name"})
         self.fields['email'].widget.attrs.update({'class' : "form-control", "ng-model":"formData.email"})
+        self.fields['password2'].widget.attrs.update({'class' : "form-control"})
+
+
+    def clean_first_name(self):
+        if re.match(r"^([a-zA-Z._ ]*)$", self.cleaned_data['first_name'].strip()):
+            if len(self.cleaned_data['first_name']) < 3:
+                raise forms.ValidationError('Name seems to be too small')
+            return self.cleaned_data['first_name'].strip()
+            if len(self.cleaned_data['first_name']) > 30:
+                raise forms.ValidationError('Name seems to be too long')
+        raise forms.ValidationError('Please enter a valid  name')
+
+    def clean_last_name(self):
+        if re.match(r"^([a-zA-Z._ ]*)$", self.cleaned_data['last_name'].strip()):
+            if len(self.cleaned_data['last_name']) < 3:
+                raise forms.ValidationError('Name seems to be too small')
+            return self.cleaned_data['last_name'].strip()
+            if len(self.cleaned_data['last_name']) > 20:
+                raise forms.ValidationError('Name seems to be too long')
+        raise forms.ValidationError('Please enter a valid  company name')
+
+
+    def clean_email(self):
+        if self.cleaned_data["email"]:
+            if len(self.cleaned_data['email']) > 30:
+                raise djangoSimpleForm.ValidationError('e-mail ID seems to be too long')
+            try:
+                user = User.objects.get(
+                    username=self.cleaned_data['email']
+                )
+            except ObjectDoesNotExist:
+                return self.cleaned_data['email']
+            raise forms.ValidationError('This e-mail ID already exists.')
+        else:
+            raise forms.ValidationError('Please enter a valid  email')
+
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+        password2 = self.cleaned_data.get('password2')
+
+        # At least MIN_LENGTH long
+        if len(password) < 3:
+            raise forms.ValidationError("The password must be at least %d characters long." % 4)
+        if not password2 or password2 != password:
+            raise forms.ValidationError("Passwords don't match")
+        return password
 
 
 
@@ -80,14 +127,6 @@ class CompanyProfileForm(ModelForm):
         raise forms.ValidationError('Invalid Contact No.')
 
 
-    # def clean_email(self):
-    #     try:
-    #         user = User.objects.get(
-    #             username=self.cleaned_data['email']
-    #         )
-    #     except ObjectDoesNotExist:
-    #             return self.cleaned_data['email']
-    #     raise forms.ValidationError('This e-mail ID already exists.')
 
 
 class OpeningDetailsForm(ModelForm):
