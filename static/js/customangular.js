@@ -1,4 +1,4 @@
-var ruckusTool	 = angular.module('workTojob', ['ngRoute']);
+var ruckusTool	 = angular.module('workTojob', ['ngAnimate', 'ngRoute']);
 
 
 ruckusTool.config(function($interpolateProvider) {
@@ -26,6 +26,31 @@ ruckusTool.config(function($routeProvider) {
           redirectTo: '/'
         });
 });
+
+
+
+ruckusTool.config(function($routeProvider) {
+
+  $routeProvider
+      .when('/profile', {
+        templateUrl: '/static/pages/form-profile.html',
+        controller: 'profileFormController'
+      })
+      .when('/interests', {
+        templateUrl: '/static/pages/form-interests.html',
+        controller: 'companyFormController'
+      })        
+      .when('/payment', {
+        templateUrl: '/static/pages/form-payment.html',
+        controller: 'submitFormController'
+      })
+      .otherwise({
+        redirectTo: '/profile'
+  });
+
+})
+
+
 
 ruckusTool.controller("JobDetailPage", function($scope, $http) {
     $scope.close_job_position_popup = function() {
@@ -100,7 +125,85 @@ ruckusTool.controller("CreateProfileTab3Controeller", function($scope, $http, $l
 
 ruckusTool.controller("CreateJobProfileControeller", function($scope, $http, $location) {});
 
+ruckusTool.controller("registorFormController", function($scope, $http, $rootScope, $location) {
 
+    $scope.location = $location.path();
+    $rootScope.$on('$routeChangeSuccess', function() {
+        $scope.location = $location.path();
+    });
+    // we will store all of our form data in this object
+    $scope.formData = {};
+    // function to process the form
+
+
+});
+
+
+ruckusTool.controller('profileFormController', function($scope, $http, $location) {
+    $scope.profile_validation = false
+    $scope.message_status = false
+    $scope.go_to_intrest = function(){
+      if(!$scope.myform.$valid) {
+        $scope.profile_validation = true
+      }else{
+        $scope.check_username_existance($scope.formData.email)
+        $scope.profile_validation = false
+      }
+    }
+
+    $scope.check_username_existance = function(username){
+        url = '/register/check/'+$scope.formData.email+'/availability'
+        $http({
+              method: "get",
+              url:url,
+        }).success(function(data){
+            if(data.status == true){
+              $scope.message_status = true
+              $scope.error_message = 'the email already exists.'
+            }else{
+              $scope.message_status = false
+              $location.url('/interests');
+            }
+        }).error(function(data, status, headers, config) {});
+
+    }
+});
+
+ruckusTool.controller('companyFormController', function($scope, $controller, $location) {
+    $scope.profile_validation = false
+    
+    $scope.go_to_intrest = function(){
+      if(!$scope.myform.$valid) {
+        $scope.profile_validation = true
+      }else{
+        $scope.profile_validation = false
+        $location.url('/payment');
+      }
+    }
+   if($scope.formData.email==undefined){
+      $location.url('/profile');
+    } 
+});
+
+
+ruckusTool.controller('submitFormController', function($scope, $http, $location) {
+
+   if($scope.formData.email==undefined){
+      $location.url('/profile');
+    } 
+    $scope.processForm = function() {
+      url = '/register/create/company/profile'
+      $http.defaults.headers.post['X-CSRFToken'] = document.querySelector('[name="csrfmiddlewaretoken"]').value;
+      $http({
+            method: "POST",
+            data: $scope.formData,
+            url:url,
+      }).success(function(data){
+          window.location.assign("/");
+
+      }).error(function(data, status, headers, config) {});
+    };
+});
 
 
 

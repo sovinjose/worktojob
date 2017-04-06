@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^accounts/login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^', include('userRegistration.urls')),
+    url(r'^register', include('company_profile.urls')),
 ]

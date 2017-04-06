@@ -1,0 +1,60 @@
+    <div role="tabpanel" class="tab-pane active" id="personal" ng-controller="companyFormController">
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-sm-12">
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="form-group ">
+                            <label class="signin-form__signup ng-binding">Company Name</label>
+                            <p ng-show="myform.company_name.$invalid" class="help-block">company name is required.</p>
+                            <input class="form-control" id="id_company_name" maxlength="100" name="company_name" required ng-model="formData.company_name" placeholder="Company Name" type="text">
+                        </div><!-- /.form-group -->
+                        <div class="form-group ">
+                        <label class="signin-form__signup ng-binding">What type of job you are hiring for?</label>
+                            <p ng-show="myform.industry.$invalid" class="help-block">categories is required.</p>
+                            <select class="form-control " id="id_industry" name="industry" ng-model="formData.industry" required placeholder="Categories">
+                                <option value="" selected="selected">---------</option>
+                                <option value="IT-Software / Software Services">IT-Software / Software Services</option>
+                                <option value="BPO / Call Centre / ITES">BPO / Call Centre / ITES</option>
+                                <option value="Automobile / Auto Anciliary / Auto Components">Automobile / Auto Anciliary / Auto Components</option>
+                                <option value="Accounting / Finance">Accounting / Finance</option>
+                                <option value="Advertising / PR / MR / Event Management">Advertising / PR / MR / Event Management</option>
+                                <option value="Agriculture / Dairy">Agriculture / Dairy</option>
+                                <option value="Animation / Gaming">Animation / Gaming</option>
+                                <option value="Architecture / Interior Design">Architecture / Interior Design</option>
+                                <option value="Aviation / Aerospace Firms">Aviation / Aerospace Firms</option>
+                                <option value="Banking / Financial Services / Broking">Banking / Financial Services / Broking</option>
+                                <option value="Brewery / Distillery">Brewery / Distillery</option>
+                                <option value="Broadcasting">Broadcasting</option>
+                                <option value="Consumer Electronics / Appliances / Durables">Consumer Electronics / Appliances / Durables</option>
+                                <option value="Education / Teaching / Training">Education / Teaching / Training</option>
+                                <option value="Electricals / Switchgears">Electricals / Switchgears</option>
+                                <option value="Others">Others</option>
+                            </select>
+
+                                                    
+                        </div><!-- /.form-group -->
+                        <div class="form-group ">
+                            <label class="signin-form__signup ng-binding">Location</label>
+                            <p ng-show="myform.location.$invalid" class="help-block">location is required.</p>
+                            <input class="form-control" id="id_location" maxlength="100" name="location" ng-model="formData.location" required placeholder="Location" type="text">
+                        </div><!-- /.form-group -->
+                    </div>
+
+                </div>
+            </div><!-- /.col-* -->
+
+        </div><!-- /.row -->
+
+        <div class="center">
+            <button ng-click="go_to_intrest()" class="btn btn-secondary"><sapn class="button-text">Save and go Next</sapn></button>
+        </div><!-- /.center -->
+
+
+
+        <div class="center " style="margin-top: 2%">
+            <button type="submit" class="btn btn">Skip</button>
+            
+        </div><!-- /.center -->
+    </div><!-- /.tab-pane -->

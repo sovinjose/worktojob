@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'userRegistration',
     'WorkToJob',
+    'company_profile'
 ]
 
 MIDDLEWARE_CLASSES = [
