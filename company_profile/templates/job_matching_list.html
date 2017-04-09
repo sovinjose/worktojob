@@ -1,0 +1,124 @@
+{% extends 'base.html' %}{% load staticfiles %}
+{% block pageHead %}
+    <h1 class="center">{{cmp_details.name}} Job List</h1>
+{% endblock %}
+
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Job List</a></li>
+    </ul>
+{% endblock %}
+
+
+{% block pageContent %}
+
+
+<div class="row">
+	<div class="col-sm-12" style="margin-left: 4%">
+		<div class="col-sm-4">
+		<h4 style=" margin-bottom: 4%;color: #d26e13;">Job Profile</h4>
+			<div class="border-class">
+				<div class="job-preview job-preview--image-set is-ready job-preview--show-info">
+					<div class="jov-preview__status ">
+						<p> {{job_obj.job_title}} </p>
+					</div>
+
+					<ul class="list-unstyled">
+					  <li><b>Location</b> : {{job_obj.job_title}}</li>
+					  <li><b>salary</b> : £{{job_obj.salary_min}},000 - £{{job_obj.salary_max}},000</li>
+					  <li><b>Start Date</b> : {{job_obj.job_start_date}}</li>
+					  <li>We are recruiting for a {{job_obj.job_type}} {{job_obj.department}}</li>
+					  <li><b>Description</b> : {{job_obj.job_description}}</li>
+					</ul>
+				</div>
+			</div>
+		
+		</div>
+
+        <div class="col-sm-3">
+            <p style=" margin-bottom: 1%;color: #d26e13;">Select All | Top 10 |____</p>
+            <div id="inner-content-div" style="padding:2px;">
+            <div style="margin-left: 7%;margin-right: 7%">
+            {% for obj in emp_obj %}
+            <div class="row" style="margin-top: 7%; border: 1px solid;border-color: #73b5ee;background-color: white;">
+                <i class="fa fa-circle" aria-hidden="true" style="padding-left:2px; padding-top:4px; color:#ff7a00"></i>
+                
+                <div class="col-sm-12" style="margin-bottom: 1%;">
+
+                    <div class="small-box" style="font-weight: bold;">
+                        <p style="margin-top: 2%;">{{obj.name}}
+                        </p>
+                    </div>
+                    <p style="margin: 0px"> {{obj.degree}}</p>
+                    <p style="margin: 0px"> {{obj.college}}</p>
+                    <p style="position:absolute;top:4px;right:6px;color:green"><b>{{obj.mark}}</b></p>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+        <h4 style=" margin-bottom: 4%;color: #d26e13;"></h4>
+            <div class="border-class">
+                <div class="job-preview job-preview--image-set is-ready job-preview--show-info">
+                    <div class="jov-preview__status ">
+                        <p> Profile Details </p>
+                    </div>
+
+                    <h4>{{job_obj.job_title}}</h4>
+
+                    <ul class="list-unstyled">
+                      <li><b>Location</b> : {{job_obj.job_title}}</li>
+                      <li><b>salary</b> : £{{job_obj.salary_min}},000 - £{{job_obj.salary_max}},000</li>
+                      <li><b>Start Date</b> : {{job_obj.job_start_date}}</li>
+                      <li>We are recruiting for a {{job_obj.job_type}} {{job_obj.department}}</li>
+                      <li><b>Description</b> : {{job_obj.job_description}}</li>
+                    </ul>
+                </div>
+            </div>       
+        </div>
+	</div>
+</div>
+
+<style type="text/css">
+	
+.border-class {
+	border: 1px solid;
+	border-color:hsla(133, 31%, 65%, 0.75);
+	background-color: #eeeeee;
+	padding: 2%;
+}
+
+.job-preview.job-preview--show-info.job-preview--image-set {
+    background: #fff;
+    box-shadow: 0 8px 24px 0 rgba(0,0,0,.16);
+    padding: 16px;
+}
+
+.jov-preview__status {
+    margin: -16px -16px 16px;
+    padding: 16px;
+    border-radius: 8px 8px 0 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+
+.is-ready .jov-preview__status {
+    background-color: #ffd77c;
+    color: #ee9a00;
+}
+
+</style>
+<script type="text/javascript">
+    
+
+$('#inner-content-div').slimScroll({
+    height: '270px'
+});
+</script>
+{% endblock %}

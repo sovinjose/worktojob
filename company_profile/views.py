@@ -8,7 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
-from .models import CompanyUserProfile, JobProfile
+from .models import CompanyUserProfile, JobProfile, Employe
 from .form import JobProfileForm
 
 
@@ -117,6 +117,18 @@ class JobListView(View):
             'job_list' : job_list,
         }
         return render(request, 'job_list.html', context)
+
+class JobMatchingList(View):
+
+    def get(self, request, job_id):
+        emp_obj = Employe.objects.all()
+        job_obj = JobProfile.objects.get(id=job_id)
+
+        context = {
+            'emp_obj' : emp_obj,
+            'job_obj' :job_obj
+        }
+        return render(request, 'job_matching_list.html', context)
 
 
 

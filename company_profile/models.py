@@ -54,3 +54,13 @@ class JobProfile(models.Model):
     salary_min = models.CharField(max_length=100, blank=True, null=True, choices=MIN_SLRY)
     salary_max = models.CharField(max_length=100, blank=True, null=True, choices=MAX_SLRY)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Employe(models.Model):
+    name = models.CharField(max_length=100)
+    department = models.CharField(max_length=100)
+    college = models.CharField(max_length=100)
+    degree = models.CharField(max_length=100)
+    mark = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    job_start_date = models.DateTimeField()
