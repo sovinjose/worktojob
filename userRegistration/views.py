@@ -197,13 +197,11 @@ class CloseJobStatus(View):
 class CompanyJobListView(View):
 
     def get(self, request):
-        cmp_details = CompanyProfile.objects.get(user_profile=request.user)
-        opng_details = OpeningDetails.objects.all()
+        job_list = OpeningDetails.objects.filter(company__user_profile=request.user)
         context = {
-            'opng_details' : opng_details,
-            'cmp_details' : cmp_details
+            'job_list' : job_list,
         }
-        return render(request, 'company_job_list.html', context)
+        return render(request, 'job_list.html', context)
 
 
 

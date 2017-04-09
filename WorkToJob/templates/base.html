@@ -71,33 +71,29 @@
 
             <div class="container">
 
-
+                {% if user.is_authenticated %}
                 <ul class="header-nav nav nav-pills collapse" style=" padding-left: 5%;">
                     <li>
                         <a href="/"><i class="fa fa-home" aria-hidden="true" style="font-size: 15px;"></i>  Home</a>
                     </li>
-
                     <li>
-                        <a href="{% url 'create_job_profile' %}">Post a Job</a>
+                        <a href="{% url 'create_job' %}">Post a Job</a>
                     </li>
                 </ul>
-
+                
                 <ul class="header-nav nav nav-pills collapse" style="float: right">
-
-                    {% if user.is_authenticated %}
-                        <li>
-                            <a href="#">{{user.first_name|title}} {{user.last_name|title}} <i class="fa fa-chevron-down"></i></a>
-                            <ul class="sub-menu">
-                                <li><a href="#">Profile</a></li>
-                                <li><a href="{% url 'logout' %}?next=/accounts/login">Logout</a></li>
-                            </ul>
-                        </li>
-                    {% else %}
-                    {% endif %}
-
+                    <li>
+                        <a href="#">{{user.first_name|title}} {{user.last_name|title}} <i class="fa fa-chevron-down"></i></a>
+                        <ul class="sub-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="{% url 'logout' %}?next=/accounts/login">Logout</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#" class="primary">Help</a></li>
                     <li><a href="#" class="primary"><i class="fa fa-search" aria-hidden="true" style="font-size: 20px;"></i></a></li>
                 </ul><!-- /.header-actions -->
+                {% endif %}
+
 
                 <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav">
                     <span class="sr-only">Toggle navigation</span>

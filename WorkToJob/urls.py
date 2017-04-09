@@ -21,6 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
-    url(r'^', include('userRegistration.urls')),
-    url(r'^register', include('company_profile.urls')),
+    url(r'^cmp', include('userRegistration.urls')),
+    url(r'^', include('company_profile.urls')),
 ]

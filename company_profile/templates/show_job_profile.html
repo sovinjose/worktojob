@@ -1,0 +1,128 @@
+{% extends 'base.html' %}{% load staticfiles %}
+{% block pageHead %}
+    <h1 class="center">{{cmp_details.name}} Job List</h1>
+{% endblock %}
+
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Job List</a></li>
+    </ul>
+{% endblock %}
+
+
+{% block pageContent %}
+
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="col-sm-1">
+		</div>
+		<div class="col-sm-5">
+		<h4 style=" margin-bottom: 4%;color: #d26e13;">Job Profile</h4>
+			<div class="border-class">
+				<div class="job-preview job-preview--image-set is-ready job-preview--show-info">
+					<div class="jov-preview__status ">
+						<p> Ready to be published </p>
+					</div>
+
+					<h4>{{job_obj.job_title}}</h4>
+
+					<ul class="list-unstyled">
+					  <li><b>Location</b> : {{job_obj.job_title}}</li>
+					  <li><b>salary</b> : £{{job_obj.salary_min}},000 - £{{job_obj.salary_max}},000</li>
+					  <li><b>Start Date</b> : {{job_obj.job_start_date}}</li>
+					  <li>We are recruiting for a {{job_obj.job_type}} {{job_obj.department}}</li>
+					  <li><b>Description</b> : {{job_obj.job_description}}</li>
+					</ul>
+				</div>
+			</div>
+
+            <div  style="margin-top: 6%;">
+                <a href="{% url 'update_job_profile' job_obj.id %}" style="color:#31708f;font-size:14px"> <i class="fa fa-backward" aria-hidden="true"> </i> <u>Go Back to Edit Jo </u> </a>
+            </div><!-- /.center -->
+		
+		</div>
+
+        <div class="col-sm-1">
+        </div>
+
+        <div class="col-sm-5">
+            <h4 style=" margin-bottom: 4%;color: #d26e13;">Campaign Details</h4>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <div class="form-group col-sm-8">
+
+                                <div class="small-box">
+                                    <div class="center" style="margin-top: 1%;">Candidates from all over UK</div>
+                                </div>
+                            </div><!-- /.form-group -->
+                            <div class="form-group col-sm-4">
+                                <div class="small-box">
+                                    <div class="center" style="margin-top: 1%;">Only from Job Locations</div>
+                                </div>
+                            </div><!-- /.form-group -->
+                        </div><!-- /.row -->
+                        <div class="row" style="margin-top: 7%; border: 1px solid;border-color: #73b5ee;background-color: white;">
+                            <div class="col-sm-12" style="margin-top: 5%;    margin-bottom: 3%;">
+                                <div class="col-sm-5">
+                                    <div id="preview">
+                                        <canvas width="162" height="44" id="canvas-preview" style="width: 162px; height: 44px;margin-left: -35%!important;"></canvas>
+                                      </div>
+                                    
+                                </div>
+                                <div class="col-sm-7">
+                                    <p> your audiance selection is fairly broad
+                                </div>
+                            </div><!-- /.company-card -->
+                            <div class="col-sm-12" style="margin-bottom: 1%;">
+                                <div class="small-box" style="font-weight: bold;">
+                                    <div class="center" style="margin-top: 1%;">170 Potential Candidates
+									</div>
+                                </div>
+                                <p class="center" style="margin-top: 2%;"> This is only an estimate. Numbers shown are based on the latest available data, from your selected criteria. </p>
+                            </div>
+                        </div>
+                        <div class="center" style="margin-top: 13%;">
+                            <a href="/" class="btn btn-secondary" style="border-radius: 24px;background-color: #ed7631;">Review & Post Job</a>
+                        </div><!-- /.center -->
+                    </div><!-- /.company-card -->
+                </div><!-- /.col-* -->
+        </div>
+	</div>
+</div>
+
+<style type="text/css">
+	
+.border-class {
+	border: 1px solid;
+	border-color:hsla(133, 31%, 65%, 0.75);
+	background-color: #eeeeee;
+	padding: 2%;
+}
+
+.job-preview.job-preview--show-info.job-preview--image-set {
+    background: #fff;
+    box-shadow: 0 8px 24px 0 rgba(0,0,0,.16);
+    padding: 16px;
+}
+
+.jov-preview__status {
+    margin: -16px -16px 16px;
+    padding: 16px;
+    border-radius: 8px 8px 0 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+
+.is-ready .jov-preview__status {
+    background-color: #ffd77c;
+    color: #ee9a00;
+}
+
+</style>
+{% endblock %}

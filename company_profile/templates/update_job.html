@@ -1,0 +1,283 @@
+{% extends 'base.html' %}{% load staticfiles %}
+{% block pageHead %}
+    <h1 class="center">{{cmp_details.name}} Job List</h1>
+{% endblock %}
+
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Create Job Profile</a></li>
+    </ul>
+{% endblock %}
+
+
+{% block pageContent %}
+<!-- jQuery-2.1.3 -->
+
+<!-- gauge.js -->
+<script src="{% static 'plugins/gauge-js/gauge.min.js' %}"></script>
+
+
+
+<div ng-controller="CreateJobProfileControeller">
+
+	<div class="row">
+		<div class="col-sm-12">
+            <form method="post" action=''>{% csrf_token %}
+            <div class="row">
+                    <div class="col-sm-1">
+                    </div>
+                    <div class="col-sm-5" style="border: 1px solid;border-color:hsla(133, 31%, 65%, 0.75);background-color: white;"> 
+                        <h4 style="margin-bottom: 4%;color: #d26e13;">Job Profile</h4>
+                            <div class="row">
+                                <label class="col-sm-3" style="margin-top: 2%;">Job Title</label>
+                                <div class="form-group col-sm-9">
+                                    {{form.job_title}}
+                                    {{form.job_title.errors}}
+                                </div><!-- /.form-group -->
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-3" style="margin-top: 2%;">Department</label>
+                                <div class="form-group col-sm-9">
+                                    {{form.department}}
+                                    {{form.department.errors}}
+                                    
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
+
+                            <div class="row">
+                                <label class=" col-sm-3" style="margin-top: 2%;">Salary Range</label>
+                                <div class="form-group col-sm-4">
+                                    {{form.salary_min}}
+                                    {{form.salary_min.errors}}
+                                </div><!-- /.form-group -->
+                                <label class=" col-sm-1" style="margin-top: 2%";>to</label>
+                                <div class="form-group col-sm-4">
+                                    {{form.salary_max}}
+                                    {{form.salary_max.errors}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
+
+
+                            <div class="row">
+                                <label class="col-sm-3" style="margin-top: 2%;">Job Type</label>
+                                <div class="form-group col-sm-9">
+                                    {{form.job_type}}
+                                    {{form.job_type.errors}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
+
+
+                            <div class="row">
+                                <label class="col-sm-3" style="margin-top: 2%;">Job Start Date</label>
+                                <div class="form-group col-sm-9">                                    
+                                    <div class="input-group input-append date" id="startDatePicker">
+                                        {{form.job_start_date}}
+                                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    {{form.job_start_date.errors}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
+
+                            <div class="row">
+                                <label class="col-sm-3" style="margin-top: 2%;">Job Location</label>
+                                <div class="form-group col-sm-9">
+                                    {{form.job_location}}
+                                    {{form.job_location.errors}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
+
+
+                            <div class="row">
+                                <label class="col-sm-3" style="margin-top: 2%;">Job Description</label>
+                                <div class="form-group col-sm-9">
+                                    {{form.job_description}}
+                                    {{form.job_description.errors}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
+
+
+
+
+                    </div><!-- /.col-* -->
+
+                    <div class="col-sm-1">
+                    </div>
+
+                    <div class="col-sm-5">
+                        <h4 style=" margin-bottom: 4%;color: #d26e13;">Campaign Details</h4>
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                       <div class="small-box">
+                                            <div class="center" style="margin-top: 1%;">Start Date</div>
+                                        </div>
+                                    </div><!-- /.form-group -->
+
+                                    <div class="form-group col-sm-4">
+                                       <div class="small-box">
+                                            <div class="center" style="margin-top: 1%;">End Date</div>
+                                        </div>
+                                    </div><!-- /.form-group -->
+
+
+                                    <div class="form-group col-sm-4">
+                                        <div class="small-box">
+                                            <div class="center" style="margin-top: 1%;">28 days</div>
+                                        </div>
+                                    </div><!-- /.form-group -->
+
+
+                                </div><!-- /.row -->
+                                </div><!-- /.company-card -->
+                            </div><!-- /.col-* -->
+
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="form-group col-sm-8">
+
+                                            <div class="small-box">
+                                                <div class="center" style="margin-top: 1%;">Candidates from all over UK</div>
+                                            </div>
+                                        </div><!-- /.form-group -->
+
+                                        <div class="form-group col-sm-4">
+                                            <div class="small-box">
+                                                <div class="center" style="margin-top: 1%;">Only from Job Locations</div>
+                                            </div>
+                                        </div><!-- /.form-group -->
+                                    </div><!-- /.row -->
+
+
+
+                                    <div class="row" style="margin-top: 7%; border: 1px solid;border-color: #73b5ee;background-color: white;">
+                                        <div class="col-sm-12" style="margin-top: 5%;    margin-bottom: 3%;">
+                                            <div class="col-sm-5">
+                                                <div id="preview">
+                                                    <canvas width="162" height="44" id="canvas-preview" style="width: 162px; height: 44px;margin-left: -35%!important;"></canvas>
+                                                  </div>
+                                                
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <p> your audiance selection is fairly broad
+                                            </div>
+                                        </div><!-- /.company-card -->
+                                        <div class="col-sm-12" style="margin-bottom: 1%;">
+                                            <div class="small-box" style="font-weight: bold;">
+                                                <div class="center" style="margin-top: 1%;">170 Potential Candidates
+</div>
+                                            </div>
+                                            <p class="center" style="margin-top: 2%;"> This is only an estimate. Numbers shown are based on the latest available data, from your selected criteria. </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="center" style="margin-top: 13%;">
+                                        <button type="submit" class="btn btn-secondary" style="border-radius: 24px;background-color: #ed7631;">Review & Post Job</button>
+                                    </div><!-- /.center -->
+
+
+                                </div><!-- /.company-card -->
+                            </div><!-- /.col-* -->
+                        </div>
+
+
+
+
+
+                    </form>
+
+
+                    </div><!-- /.col-* -->
+		</div>
+	</div>
+</div>
+</div>
+
+
+<script type="text/javascript">
+     $(document).ready(function() {
+
+        var opts = {
+          angle: -0.02, // The span of the gauge arc
+          lineWidth: 0.14, // The line thickness
+          radiusScale: 1, // Relative radius
+          pointer: {
+            length: 0.35, // // Relative to gauge radius
+            strokeWidth: 0.033, // The thickness
+            color: '#2A3269' // Fill color
+          },
+          limitMax: false,     // If false, the max value of the gauge will be updated if value surpass max
+          limitMin: false,     // If true, the min value of the gauge will be fixed unless you set it manually
+          colorStart: '#CACF3C',   // Colors
+          colorStop: '#8FC0DA',    // just experiment with them
+          strokeColor: '#E0E0E0',  // to see which ones work best for you
+          generateGradient: true,
+          highDpiSupport: true     // High resolution support
+        };
+        var target = document.getElementById('canvas-preview'); // your canvas element
+        var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+        gauge.maxValue = 3000; // set max gauge value
+        gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+        gauge.animationSpeed = 35; // set animation speed (32 is default value)
+        gauge.set(375); // set actual value
+
+        
+    });
+</script>
+
+<style type="text/css">
+    
+.company-card-image {
+    padding: 20px 30px;
+}
+
+.company-card {
+    margin: 0px 0px 0px 0px;
+}
+
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 144px;
+}
+
+
+.company-card {
+    border: 1px solid;
+    margin: 0px 0px 0px 0px;
+}
+
+.company-card-image {
+    padding: 58px 20px;
+    position: relative;
+    text-align: center;
+}
+
+.small-box {
+    border: 1px solid;
+    padding: 5%;
+    background-color: white;
+}
+
+
+</style>
+
+
+
+<script type="text/javascript">
+    
+
+
+$('#id_job_start_date').datepicker({
+    })
+
+
+
+
+</script>
+
+{% endblock %}
