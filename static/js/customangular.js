@@ -1,4 +1,4 @@
-var ruckusTool	 = angular.module('workTojob', ['ngAnimate', 'ngRoute']);
+var ruckusTool	 = angular.module('workTojob', ['ngRoute']);
 
 
 ruckusTool.config(function($interpolateProvider) {
