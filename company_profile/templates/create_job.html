@@ -114,21 +114,26 @@
                             <div class="col-sm-8">
                                 <div class="row">
                                     <div class="form-group col-sm-4">
-                                       <div class="small-box">
-                                            <div class="center" style="margin-top: 1%;">Start Date</div>
+                                       <div class="small-box" style="padding: 0px;">
+                                            <div class="input-group input-append date" id="DatePicker">
+                                                <input class="form-control" id="id_start_date" ng-model="start_date_model" ng-change="change_date_diff()" name="start_date" type="text" required="" placeholder="Start Date">
+                                            </div>
                                         </div>
                                     </div><!-- /.form-group -->
 
                                     <div class="form-group col-sm-4">
-                                       <div class="small-box">
-                                            <div class="center" style="margin-top: 1%;">End Date</div>
+
+                                       <div class="small-box" style="padding: 0px;">
+                                            <div class="input-group input-append date" id="end_date">
+                                                <input class="form-control" id="id_end_date" ng-model="end_date_model" ng-change="change_date_diff()" name="end_date" type="text" required="" placeholder="End Date">
+                                            </div>
                                         </div>
                                     </div><!-- /.form-group -->
 
 
                                     <div class="form-group col-sm-4">
-                                        <div class="small-box">
-                                            <div class="center" style="margin-top: 1%;">28 days</div>
+                                        <div class="small-box" style="background-color: #f5f5f5;">
+                                            <div class="center" style="margin-top: 1%;">{[{time_diff}]} days</div>
                                         </div>
                                     </div><!-- /.form-group -->
 
@@ -282,11 +287,9 @@
     
 
 
-$('#id_job_start_date').datepicker({
-    })
-
-
-
+$('#id_job_start_date').datepicker({})
+$('#id_start_date').datepicker({})
+$('#id_end_date').datepicker({})
 
 </script>
 

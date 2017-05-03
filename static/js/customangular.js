@@ -123,7 +123,22 @@ ruckusTool.controller("CreateProfileTab3Controeller", function($scope, $http, $l
     $location.url('/view3');
 })
 
-ruckusTool.controller("CreateJobProfileControeller", function($scope, $http, $location) {});
+ruckusTool.controller("CreateJobProfileControeller", function($scope, $http, $location) {
+
+    $scope.start_date_model = (new Date()).toISOString().split(':')[0].split('T')[0]
+    $scope.tomorrow = new Date();
+    var offset = 28 * 24 * 60 * 60 * 1000;
+    $scope.end_date_model = new Date($scope.tomorrow.getTime() + offset)
+    $scope.time_diff = 28
+    $scope.end_date_model = $scope.end_date_model.toISOString().split(':')[0].split('T')[0]
+
+    $scope.change_date_diff = function(){
+      $scope.date1 = new Date($scope.start_date_model);
+      $scope.date2 = new Date($scope.end_date_model);
+      $scope.time_diff = parseInt(( $scope.date2 -  $scope.date1) / (1000 * 60 * 60 * 24))
+    }
+
+});
 
 ruckusTool.controller("registorFormController", function($scope, $http, $rootScope, $location) {
 
