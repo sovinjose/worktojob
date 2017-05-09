@@ -205,8 +205,22 @@ ruckusTool.controller('submitFormController', function($scope, $http, $location)
 
    if($scope.formData.email==undefined){
       $location.url('/profile');
-    } 
-    $scope.processForm = function() {
+    }
+
+
+
+    $scope.processForm = function(){
+      if(!$scope.myform.$valid) {
+        $scope.profile_validation = true
+      }else{
+        $scope.profile_validation = false
+        $scope.go_for_submit_form();
+      }
+    }
+
+
+
+    $scope.go_for_submit_form = function() {
 
       console.log($scope.formData)
       url = '/register/create/company/profile'
