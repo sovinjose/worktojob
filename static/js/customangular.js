@@ -177,7 +177,7 @@ ruckusTool.controller('profileFormController', function($scope, $http, $location
               $scope.error_message = 'the email already exists.'
             }else{
               $scope.message_status = false
-              $location.url('/interests');
+              $location.url('/payment');
             }
         }).error(function(data, status, headers, config) {});
 
@@ -207,6 +207,8 @@ ruckusTool.controller('submitFormController', function($scope, $http, $location)
       $location.url('/profile');
     } 
     $scope.processForm = function() {
+
+      console.log($scope.formData)
       url = '/register/create/company/profile'
       $http.defaults.headers.post['X-CSRFToken'] = document.querySelector('[name="csrfmiddlewaretoken"]').value;
       $http({

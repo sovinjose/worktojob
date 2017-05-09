@@ -49,6 +49,30 @@
 
      <link  type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css">
 
+<!-- Start of Async Drift Code -->
+<script>
+!function() {
+  var t;
+  if (t = window.driftt = window.drift = window.driftt || [], !t.init) return t.invoked ? void (window.console && console.error && console.error("Drift snippet included twice.")) : (t.invoked = !0, 
+  t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
+  t.factory = function(e) {
+    return function() {
+      var n;
+      return n = Array.prototype.slice.call(arguments), n.unshift(e), t.push(n), t;
+    };
+  }, t.methods.forEach(function(e) {
+    t[e] = t.factory(e);
+  }), t.load = function(t) {
+    var e, n, o, i;
+    e = 3e5, i = Math.ceil(new Date() / e) * e, o = document.createElement("script"), 
+    o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + i + "/" + t + ".js", 
+    n = document.getElementsByTagName("script")[0], n.parentNode.insertBefore(o, n);
+  });
+}();
+drift.SNIPPET_VERSION = '0.3.1';
+drift.load('8v65568iw2ic');
+</script>
+ <!-- End of Async Drift Code -->
 
 
 
@@ -77,7 +101,7 @@
                         <a href="/"><i class="fa fa-home" aria-hidden="true" style="font-size: 15px;"></i>  Home</a>
                     </li>
                     <li>
-                        <a href="{% url 'create_job' %}">Post a Job</a>
+                        <a href="{% url 'create_job' %}">Post Vacancy</a>
                     </li>
                 </ul>
                 
@@ -85,12 +109,20 @@
                     <li>
                         <a href="#">{{user.first_name|title}} {{user.last_name|title}} <i class="fa fa-chevron-down"></i></a>
                         <ul class="sub-menu">
-                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Profile Settings</a></li>
+                            <li><a href="#">Company Settings</a></li>
+                            <li><a href="#">Account</a></li>
                             <li><a href="{% url 'logout' %}?next=/accounts/login">Logout</a></li>
                         </ul>
                     </li>
-                    <li><a href="#" class="primary">Help</a></li>
-                    <li><a href="#" class="primary"><i class="fa fa-search" aria-hidden="true" style="font-size: 20px;"></i></a></li>
+                    <li>
+                    <a href="#" class="primary">Help <i class="fa fa-chevron-down"></i></a>
+                    <ul class="sub-menu">
+                        <li><a href="#">Quick Start</a></li>
+                        <li><a href="#">New Features*</a></li>
+                        <li><a href="#">Help with Features</a></li>
+                    </ul>
+                    </li>
                 </ul><!-- /.header-actions -->
                 {% endif %}
 

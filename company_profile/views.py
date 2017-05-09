@@ -20,15 +20,15 @@ class CompanyRegistration(View):
     def post(self, request):
         try :
             request_data = json.loads(request.body)
-            company_name = request_data.get("company_name")
-            description = request_data.get("description")
+            print request_data
+            email = request_data.get("email")
+            password = request_data.get("password")
             first_name = request_data.get("first_name")
             last_name = request_data.get("last_name")
-            password = request_data.get("password")
-            location = request_data.get("location")
-            industry = request_data.get("industry")
-            website = request_data.get("website")
-            email = request_data.get("email")
+            
+            company_name = request_data.get("company_name", None)
+            industry = request_data.get("industry", None)
+            company_size = request_data.get("company_size",None)
             dictToSave = {
                 'email': email,
                 'first_name': first_name,
@@ -39,8 +39,8 @@ class CompanyRegistration(View):
                 **dictToSave
             )
             cmp_obj = CompanyUserProfile.objects.create(user_profile=new_user, company_name=company_name,
-                                                        industry=industry, location=location, 
-                                                        description=description, website=website)
+                                                        industry=industry, company_size=company_size, 
+                                                        )
             user = authenticate(username=new_user.username, password=password)
             status = False
             if user is not None:

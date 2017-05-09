@@ -6,47 +6,71 @@
                 <div class="col-sm-6">
 
 
-                    <div class="page-form-field__description ng-binding"> 
-                        Let’s get some basic information right. 
-                        This will help us assist you better.
-                    </div>
-
+                <label class="page-form-field__label ng-binding">Create a new Account</label>
+                <div class="page-form-field__description ng-binding">Recruit the best Graduates with Work<i>to</i>Job..</div>
 
                     <div class="row">
                         <div class="form-group ">
-                            <label class="signin-form__signup ng-binding">Company Name</label>
-                            <p ng-show="myform.company_name.$invalid" class="help-block">company name is required.</p>
-                            <input class="form-control" id="id_company_name" maxlength="100" name="company_name" required ng-model="formData.company_name" placeholder="Company Name" type="text">
+                            <div class="row">
+                                <div class="col-sm-3" style="padding-top: 5%;">
+                                    <label class="signin-form__signup ng-binding">Size of Company</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p ng-show="myform.company_name.$invalid" class="help-block">*Required.</p>
+                                    <input class="form-control" id="id_company_name" maxlength="100" name="company_name" required ng-model="formData.company_name" placeholder="Company Name" type="text">
+                                </div>
+                            </div>
                         </div><!-- /.form-group -->
                         <div class="form-group ">
-                        <label class="signin-form__signup ng-binding">What type of job you are hiring for?</label>
-                            <p ng-show="myform.industry.$invalid" class="help-block">categories is required.</p>
-                            <select class="form-control " id="id_industry" name="industry" ng-model="formData.industry" required placeholder="Categories">
-                                <option value="" selected="selected">---------</option>
-                                <option value="IT-Software / Software Services">IT-Software / Software Services</option>
-                                <option value="BPO / Call Centre / ITES">BPO / Call Centre / ITES</option>
-                                <option value="Automobile / Auto Anciliary / Auto Components">Automobile / Auto Anciliary / Auto Components</option>
-                                <option value="Accounting / Finance">Accounting / Finance</option>
-                                <option value="Advertising / PR / MR / Event Management">Advertising / PR / MR / Event Management</option>
-                                <option value="Agriculture / Dairy">Agriculture / Dairy</option>
-                                <option value="Animation / Gaming">Animation / Gaming</option>
-                                <option value="Architecture / Interior Design">Architecture / Interior Design</option>
-                                <option value="Aviation / Aerospace Firms">Aviation / Aerospace Firms</option>
-                                <option value="Banking / Financial Services / Broking">Banking / Financial Services / Broking</option>
-                                <option value="Brewery / Distillery">Brewery / Distillery</option>
-                                <option value="Broadcasting">Broadcasting</option>
-                                <option value="Consumer Electronics / Appliances / Durables">Consumer Electronics / Appliances / Durables</option>
-                                <option value="Education / Teaching / Training">Education / Teaching / Training</option>
-                                <option value="Electricals / Switchgears">Electricals / Switchgears</option>
-                                <option value="Others">Others</option>
-                            </select>
-
-                                                    
+                            <div class="row">
+                                <div class="col-sm-3" style="padding-top: 5%;">
+                                    <label class="signin-form__signup ng-binding">Industry</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p ng-show="myform.industry.$invalid" class="help-block">*Required.</p>
+                                    <select class="form-control " id="id_industry" name="industry" ng-model="formData.industry" required placeholder="Categories">
+                                        <option value="" selected="selected">---------</option>
+                                        <option value="Accountancy&Finance">Accountancy&Finance</option>
+                                        <option value="Aerospace&Defence">Aerospace & Defence</option>
+                                        <option value="Agriculture & Environment">Agriculture & Environment</option>
+                                        <option value="Architecture & Property">Architecture & Property</option>
+                                        <option value="Biosciences & Pharmaceutical">Biosciences & Pharmaceutical</option>
+                                        <option value="Charity & Not for Profit">Charity & Not for Profit</option>
+                                        <option value="Consultancy & Strategy">Consultancy & Strategy</option>
+                                        <option value="Education & Training">Education & Training</option>
+                                        <option value="Energy & Engineering">Energy & Engineering</option>
+                                        <option value="Government & Public Sector">Government & Public Sector</option>
+                                        <option value="Healthcare & Medical">Healthcare & Medical</option>
+                                        <option value="Hospitality, Leisure and Tourism">Hospitality, Leisure and Tourism</option>
+                                        <option value="Internet, Media & Publishing">Internet, Media & Publishing</option>
+                                        <option value="IT & Software">IT & Software</option>
+                                        <option value="Legal Services">Legal Services</option>
+                                        <option value="Arts & Creative Industries">Arts & Creative Industries</option>
+                                        <option value="Retail">Retail</option>
+                                        <option value="Sales & Marketing">Sales & Marketing</option>
+                                        <option value="HR, Administration">HR, Administration</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div><!-- /.form-group -->
                         <div class="form-group ">
-                            <label class="signin-form__signup ng-binding">Location</label>
-                            <p ng-show="myform.location.$invalid" class="help-block">location is required.</p>
-                            <input class="form-control" id="id_location" maxlength="100" name="location" ng-model="formData.location" required placeholder="Location" type="text">
+                            <div class="row">
+                                <div class="col-sm-3" style="padding-top: 5%;">
+                                    <label class="signin-form__signup ng-binding">Size of Company</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p ng-show="myform.compant_size.$invalid" class="help-block">*Required.</p>
+                                    <select class="form-control " id="id_size" name="compant_size" ng-model="formData.compant_size" required placeholder="Size of Company">
+                                        <option value="" selected="selected">---------</option>
+                                        <option value="1-5">1-5 people</option>
+                                        <option value="5-10">5-10 people</option>
+                                        <option value="11-50">11-50 people</option>
+                                        <option value="51-100">51-100 people</option>
+                                        <option value="101-1000">101-1000 people</option>
+                                        <option value="1000+">1000+ people</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div><!-- /.form-group -->
                     </div>
 
@@ -63,6 +87,5 @@
 
         <div class="center " style="margin-top: 2%">
             <button type="submit" class="btn btn">Skip</button>
-            
         </div><!-- /.center -->
     </div><!-- /.tab-pane -->

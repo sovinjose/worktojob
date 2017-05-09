@@ -35,13 +35,13 @@
 
               <form method="post" action="{% url "login" %}">{% csrf_token %}
                 <div class="form-group">
-                  <label for="form-login-username">Username</label>
-                  <input type="text" name="username" class="form-control" id="form-login-username">
+                  <label for="form-login-username">Email</label>
+                  <input type="text" name="username" class="form-control" id="form-login-username" placeholder="Email">
                 </div><!-- /.form-group -->
 
                 <div class="form-group">
                   <label for="form-login-password">Password</label>
-                  <input type="password" name="password" class="form-control" id="form-login-password">
+                  <input type="password" name="password" class="form-control" id="form-login-password" placeholder="Password">
                 </div><!-- /.form-group -->
                 <!-- 
                 <div class="checkbox">
@@ -55,19 +55,20 @@
                 </div><!-- /.form-group -->
 
                 <hr>
+                <!--
 
                 <div class="row">
                   <div class="col-xs-6 col-sm-6">
                     <a href="#" class="btn btn-facebook btn-block"><i class="fa fa-facebook"></i> Facebook</a>
-                  </div><!-- /.col-sm-6 -->
+                  </div>
 
                   <div class="col-xs-6 col-sm-6">
                     <a href="#" class="btn btn-linkedin btn-block"><i class="fa fa-linkedin"></i> LinkedIn</a>
-                  </div><!-- /.col-sm-6 -->
-                </div><!-- /.row -->
-                <hr>
+                  </div>
+                </div>
+                <hr>-->
                 <div class="form-group">
-                  <p>Create an account, Sign Up <a href="{% url 'company_registration_template' %}">here!</a></p>
+                  <p>Don’t have an account? <a href="{% url 'company_registration_template' %}" style="color: #ed8735;font-size: 15px;">Get Started</a></p>
                 </div><!-- /.form-group -->
 
 
