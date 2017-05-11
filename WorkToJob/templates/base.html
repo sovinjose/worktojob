@@ -109,19 +109,19 @@ drift.load('8v65568iw2ic');
                     <li>
                         <a href="#">{{user.first_name|title}} {{user.last_name|title}} <i class="fa fa-chevron-down"></i></a>
                         <ul class="sub-menu">
-                            <li><a href="#">Profile Settings</a></li>
-                            <li><a href="#">Company Settings</a></li>
-                            <li><a href="#">Account</a></li>
+                            <li><a href="{% url 'user_profile_settings' %}">Profile Settings</a></li>
+                            <li><a href="{% url 'company_profile_settings' request.user.id %}">Company Settings</a></li>
+                            <li><a href="{% url 'my_account_settings' %}">Account</a></li>
                             <li><a href="{% url 'logout' %}?next=/accounts/login">Logout</a></li>
                         </ul>
                     </li>
                     <li>
-                    <a href="#" class="primary">Help <i class="fa fa-chevron-down"></i></a>
-                    <ul class="sub-menu">
-                        <li><a href="#">Quick Start</a></li>
-                        <li><a href="#">New Features*</a></li>
-                        <li><a href="#">Help with Features</a></li>
-                    </ul>
+                        <a href="#" class="primary">Help <i class="fa fa-chevron-down"></i></a>
+                        <ul class="sub-menu">
+                            <li><a href="#">Quick Start</a></li>
+                            <li><a href="#">New Features*</a></li>
+                            <li><a href="#">Support</a></li>
+                        </ul>
                     </li>
                 </ul><!-- /.header-actions -->
                 {% endif %}

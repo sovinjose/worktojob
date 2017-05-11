@@ -2,19 +2,44 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.files.storage import FileSystemStorage
 
+profile_pic = FileSystemStorage(
+    location='static/profile_pic/'
+)
+
+
+class UserProfile(models.Model):
+	user = models.OneToOneField(User)
+	logo = models.ImageField(storage=profile_pic, upload_to='%Y-%m-%d', blank=True, null=True)
+	city = models.CharField(max_length=100, blank=True, null=True)
+	mob_number = models.CharField(max_length=100, blank=True, null=True)
 
 
 class CompanyUserProfile(models.Model):
     user_profile = models.OneToOneField(User)
     company_name = models.CharField(max_length=100, blank=True, null=True)
     industry = models.CharField(max_length=100, blank=True, null=True)
-    location = models.CharField(max_length=100, blank=True, null=True)
     company_size = models.CharField(max_length=100, blank=True, null=True)
+    short_introduction  = models.TextField(blank=True, null=True)
+    founded_in = models.CharField(max_length=100, blank=True, null=True)
+    location = models.CharField(max_length=100, blank=True, null=True)
 
-    description = models.TextField(blank=True, null=True)
+    vision = models.TextField(blank=True, null=True)
+    mission = models.TextField(blank=True, null=True)
+    long_description = models.TextField(blank=True, null=True)
+
+    contact_details = models.CharField(max_length=100, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    contact_email = models.CharField(max_length=100, blank=True, null=True)
+    phone_number = models.CharField(max_length=100, blank=True, null=True)
     website = models.URLField(blank=True, null=True)
-    logo = models.ImageField(upload_to='cmpny_logo', blank=True, null=True)
+    linkedIn = models.URLField(blank=True, null=True)
+    facebook = models.URLField(blank=True, null=True)
+    twitter = models.URLField(blank=True, null=True)
+    logo = models.ImageField(storage=profile_pic, upload_to='cmpny_logo', blank=True, null=True)
+    banner = models.ImageField(storage=profile_pic, upload_to='cmpny_banner', blank=True, null=True)
+
 
 JOB_TYPE = (
     ('Fulltime/Part-time', 'Fulltime/Part-time'),

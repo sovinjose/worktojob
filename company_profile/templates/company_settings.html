@@ -1,0 +1,182 @@
+{% extends 'base.html' %}{% load staticfiles %}
+{% block pageHead %}
+    <h1 class="center">Company Settings</h1>
+{% endblock %}
+
+
+{% block breadcrumb %}
+
+{% endblock %}
+
+
+{% block pageContent %}
+
+<div class="row">
+    <div class="col-sm-5" style="margin-bottom: 2%;">
+        <h4>Company Setting</h4>
+        <p>Recruit the best Graduates with Work<i>to</i>Job.</p>
+    </div>
+</div>
+
+
+
+    <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-10">
+                <form action="" method="post">{% csrf_token %}
+                <div id="accordion" class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">General Info</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="row" style="padding-left: 3%;padding-right: 3%;">
+                                    <div class="form-group">
+                                        <label>Company Name</label>
+                                        {{ form.company_name }}
+                                    </div><!-- /.form-group-->
+                                    <div class="form-group">
+                                        <label>Company Size</label>
+                                        <select class="form-control " id="id_size" name="company_size" required placeholder="Size of Company">
+                                            <option value="1-5" {% if form.company_size.value == '1-5' %} selected="selected" {% endif %}> 1-5 people</option>
+                                            <option value="5-10" {% if form.company_size.value == '5-10' %} selected="selected" {% endif %}>5-10 people</option>
+                                            <option value="11-50" {% if form.company_size.value == '11-50' %} selected="selected" {% endif %}>11-50 people</option>
+                                            <option value="51-100" {% if form.company_size.value == '51-100' %} selected="selected" {% endif %}>51-100 people</option>
+                                            <option value="101-1000" {% if form.company_size.value == '101-1000' %} selected="selected" {% endif %}>101-1000 people</option>
+                                            <option value="1000+" {% if form.company_size.value == '1000+' %} selected="selected" {% endif %}>1000+ people</option>
+                                        </select>
+                                    </div><!-- /.form-group-->
+                                    <div class="form-group">
+                                        <label>Industry</label>
+                                                <select class="form-control " id="id_industry" name="industry" required placeholder="Categories">
+                                                    <option value="Accountancy&Finance" {% if form.industry.value == 'Accountancy&Finance' %} selected="selected" {% endif %}>Accountancy&Finance</option>
+                                                    <option value="Aerospace&Defence" {% if form.industry.value == 'Aerospace&Defence' %} selected="selected" {% endif %}>Aerospace & Defence</option>
+                                                    <option value="Agriculture & Environment" {% if form.industry.value == 'Agriculture & Environment' %} selected="selected" {% endif %}>Agriculture & Environment</option>
+                                                    <option value="Architecture & Property" {% if form.industry.value == 'Architecture & Property' %} selected="selected" {% endif %}>Architecture & Property</option>
+                                                    <option value="Biosciences & Pharmaceutical" {% if form.industry.value == 'Biosciences & Pharmaceutical' %} selected="selected" {% endif %}>Biosciences & Pharmaceutical</option>
+                                                    <option value="Charity & Not for Profit" {% if form.industry.value == 'Charity & Not for Profit' %} selected="selected" {% endif %}>Charity & Not for Profit</option>
+                                                    <option value="Consultancy & Strategy" {% if form.industry.value == 'Consultancy & Strategy' %} selected="selected" {% endif %}>Consultancy & Strategy</option>
+                                                    <option value="Education & Training" {% if form.industry.value == 'Education & Training' %} selected="selected" {% endif %}>Education & Training</option>
+                                                    <option value="Energy & Engineering" {% if form.industry.value == 'Energy & Engineering' %} selected="selected" {% endif %}>Energy & Engineering</option>
+                                                    <option value="Government & Public Sector" {% if form.industry.value == 'Government & Public Sector' %} selected="selected" {% endif %}>Government & Public Sector</option>
+                                                    <option value="Healthcare & Medical" {% if form.industry.value == 'Healthcare & Medical' %} selected="selected" {% endif %}>Healthcare & Medical</option>
+                                                    <option value="Hospitality, Leisure and Tourism" {% if form.industry.value == 'Hospitality, Leisure and Tourism' %} selected="selected" {% endif %}>Hospitality, Leisure and Tourism</option>
+                                                    <option value="Internet, Media & Publishing" {% if form.industry.value == 'Internet, Media & Publishing' %} selected="selected" {% endif %}>Internet, Media & Publishing</option>
+                                                    <option value="IT & Software" {% if form.industry.value == 'IT & Software' %} selected="selected" {% endif %}>IT & Software</option>
+                                                    <option value="Legal Services" {% if form.industry.value == 'Legal Services' %} selected="selected" {% endif %}>Legal Services</option>
+                                                    <option value="Arts & Creative Industries" {% if form.industry.value == 'Arts & Creative Industries' %} selected="selected" {% endif %}>Arts & Creative Industries</option>
+                                                    <option value="Retail" {% if form.industry.value == 'Retail' %} selected="selected" {% endif %}>Retail</option>
+                                                    <option value="Sales & Marketing" {% if form.industry.value == 'Sales & Marketing' %} selected="selected" {% endif %}>Sales & Marketing</option>
+                                                    <option value="HR, Administration" {% if form.industry.value == 'HR, Administration' %} selected="selected" {% endif %}>HR, Administration</option>
+                                                </select>
+                                    </div><!-- /.form-group-->
+                                    <div class="form-group">
+                                        <label>Founded In</label>
+                                        <div class="input-group input-append date" id="end_date">
+                                            <input class="form-control" id="id_end_date" name="founded_in" value="{{form.founded_in.value}}" type="text" required="" placeholder="Founded In">
+                                        </div>
+                                    </div><!-- /.form-group-->
+
+                                    <div class="form-group">
+                                        <label>Short Introduction</label>
+                                        {{form.short_introduction}}
+                                    </div><!-- /.form-group-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">More Info</a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="row" style="padding-left: 3%;padding-right: 3%;">
+                                    <div class="form-group">
+                                        <label>Vision</label>
+                                        {{form.vision}}
+                                    </div><!-- /.form-group-->
+                                    <div class="form-group">
+                                        <label>Mission</label>
+                                        {{form.mission}}
+                                    </div><!-- /.form-group-->
+                                    <div class="form-group">
+                                        <label>Long Description</label>
+                                        {{form.long_description}}
+                                    </div><!-- /.form-group-->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Contact Details</a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="row" style="padding-left: 3%;padding-right: 3%;">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        {{form.address}}
+                                    </div><!-- /.form-group-->
+                                    <div class="form-group">
+                                        <label>Contact Email</label>
+                                        {{form.contact_email}}
+                                    </div><!-- /.form-group-->
+                                    <div class="form-group">
+                                        <label>Contact Number</label>
+                                        {{form.phone_number}}
+                                    </div><!-- /.form-group-->
+                                    <div class="form-group">
+                                        <label>Website</label>
+                                        {{form.website}}
+                                    </div><!-- /.form-group-->
+                                    <div class="form-group">
+                                        <label>LinkedIn</label>
+                                        {{form.linkedIn}}
+                                    </div><!-- /.form-group-->
+                                    <div class="form-group">
+                                        <label>Twitter</label>
+                                        {{form.twitter}}
+                                    </div><!-- /.form-group-->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Update Company Details" class="btn btn-secondary pull-right" style="background-color: #ea8915;" />
+            </form>
+            </div><!-- /.col-* -->
+    </div>
+
+
+<style>
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    text-align: right;
+    opacity: 0;
+    background: 0 0;
+    cursor: inherit;
+    display: block;
+}
+</style>
+ 
+ <script type="text/javascript">
+     $('#id_end_date').datepicker({})
+ </script>
+
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}{% load staticfiles %}
+{% block pageHead %}
+    <h1 class="center">Profile Settings</h1>
+{% endblock %}
+
+
+{% block breadcrumb %}
+
+{% endblock %}
+
+
+{% block pageContent %}
+
+<div class="row">
+    <div class="col-sm-5" style="margin-bottom: 2%;">
+        <h4>Profile Setting</h4>
+        <p>Recruit the best Graduates with Work<i>to</i>Job.</p>
+    </div>
+</div>
+
+
+
+
+<div class="row">
+	<form method="post" action="" enctype = "multipart/form-data" > {% csrf_token %}
+		<div class="col-sm-1">
+		</div>
+        <div class="col-sm-3">
+			<div class="form-group">
+				<input type="file" name="profile_pic" id="form-register-photo" placeholder="browse to change profile pic">
+			</div><!-- /.form-group-->
+        </div><!-- /.col-* -->
+
+        <div class="col-sm-6">
+			<div class="row">
+			    <div class="form-group col-sm-6">
+		            <div class="form-group">
+		                <label>First Name</label>
+		                <input type="text" name="first_name" value={{request.user.first_name}} class="form-control">
+		            </div><!-- /.form-group -->
+		        </div>
+		        <div class="form-group col-sm-6">
+		            <div class="form-group">
+		                <label>Last Name</label>
+		                <input type="text" name="last_name" value={{request.user.last_name}} class="form-control">
+		            </div><!-- /.form-group -->
+		        </div>
+		    </div>
+
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="number" name="mob_number" value="{{profile_obj.mob_number}}" class="form-control">
+            </div><!-- /.form-group -->
+
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" name="city" value="{{profile_obj.city}}" class="form-control">
+            </div><!-- /.form-group -->
+
+
+
+           	<button type="submit" class="btn btn-secondary pull-right" style="background-color: #ea8915;">Update Settings</button>
+        </div><!-- /.col-* -->
+	</form>
+</div>
+
+
+
+<style>
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    text-align: right;
+    opacity: 0;
+    background: 0 0;
+    cursor: inherit;
+    display: block;
+}
+</style>
+ 
+<script type="text/javascript">	
+$( document ).ready(function() {
+
+    $('.file-drop-zone-title').hide()
+    {% if profile_obj.logo %}
+	var test = '<div class="file-preview-frame" id="preview-1494399212824-0" data-fileindex="0">'+
+   				'<img src="/static/profile_pic/{{profile_obj.logo.url}}" class="file-preview-image" title="1234 1.png" alt="1234 1.png" style="width:auto;height:160px;">'+
+				'</div>'
+	{% else %}
+
+	var test = '<div class="file-preview-frame" id="preview-1494399212824-0" data-fileindex="0">'+
+   				'<img src="/static/img/default_pic.jpg" class="file-preview-image" title="1234 1.png" alt="1234 1.png" style="width:auto;height:160px;">'+
+				'</div>'
+	{% endif %}
+	$('.file-preview-thumbnails').append(test)
+});
+</script>
+
+{% endblock %}

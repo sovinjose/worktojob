@@ -7,10 +7,12 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 
-from .models import CompanyUserProfile, JobProfile, Employe
-from .form import JobProfileForm
-
+from .models import CompanyUserProfile, JobProfile, Employe, UserProfile
+from .form import JobProfileForm, CompanyUserProfileForm
+from django.contrib.auth.forms import PasswordChangeForm
 
 class CompanyRegistration(View):
 
@@ -129,6 +131,110 @@ class JobMatchingList(View):
             'job_obj' :job_obj
         }
         return render(request, 'job_matching_list.html', context)
+
+class ProfileSettings(View):
+
+    def get(self, request):
+        profile_obj = UserProfile.objects.filter(user=request.user).first()
+        context = {
+            'profile_obj' : profile_obj
+        }
+        return render(request, 'profile_settings.html', context)
+
+    def post(self, request): 
+        mob_number =  request.POST['mob_number']
+        city =  request.POST.get('city')
+        print city
+        logo =  request.FILES.get('profile_pic')
+        user_obj = User.objects.get(id=request.user.id)
+        user_obj.first_name = request.POST['first_name']
+        user_obj.last_name = request.POST['last_name']
+        user_obj.save()
+        profile_obj, created = UserProfile.objects.get_or_create(user=request.user, 
+                            defaults={"mob_number": mob_number, "city": city, "logo": logo,}
+                            )
+        if created:
+            pass
+        else:
+            profile_obj.mob_number = mob_number
+            profile_obj.city = city
+            if logo:
+                profile_obj.logo = logo
+            profile_obj.save()
+        return redirect('/profile/settings')
+
+
+class CompanySettings(UpdateView):
+    form_class = CompanyUserProfileForm
+    template_name = 'company_settings.html'
+
+    def get_object(self):
+        return get_object_or_404(CompanyUserProfile, user_profile=self.kwargs['pk'])
+
+    def get_success_url(self):
+        return reverse('company_profile_settings', args=(self.kwargs['pk'],))
+
+
+class AccountSettings(View):
+
+    def get(self, request):
+        form = PasswordChangeForm(request.user)
+        context = {
+            'form' : form
+        }
+        return render(request, 'account_settings.html', context)
+
+    def post(self, request):
+        form = PasswordChangeForm(request.user, request.POST)
+        old_pass = request.POST['old_password']
+        new_password1 = request.POST['new_password1']
+        new_password2 = request.POST['new_password2']
+        usr_obj = User.objects.get(id=request.user.id)
+        user_auth = usr_obj.check_password(old_pass)
+        if not user_auth:
+            messages.error(request, 'Please enter correct Password.')
+            return render(request, 'account_settings.html')
+        if new_password1 == new_password2 and len(new_password1)>2:
+            request.user.set_password(new_password1)
+            update_session_auth_hash(request, request.user)
+            request.user.save(update_fields=['password'])
+            messages.success(request, 'Your password was successfully updated!')
+        else:
+            messages.error(request, 'Password does not match the confirm password. // password not valid')
+
+        return render(request, 'account_settings.html')
+
+
+class ChangeLoginEmail(View):
+
+    def get(self, request):
+        form = PasswordChangeForm(request.user)
+        context = {
+            'form' : form,
+            'email_error' :True
+        }
+        return render(request, 'account_settings.html', context)
+
+    def post(self, request):
+        new_email = request.POST['new_email']
+        usr_obj = User.objects.get(id=request.user.id)
+        if new_email:
+            try:
+                mail = User.objects.get(username=new_email)
+                messages.error(request, 'email already exists.')
+                return redirect('/change/email')
+            except:
+                usr_obj.username = new_email
+                usr_obj.email = new_email
+                usr_obj.save()
+                messages.success(request, 'Your email was successfully updated!')
+        else:
+            messages.error(request, 'Please enter correct Email.')
+
+        return redirect('/change/email')
+
+
+
 
 
 
