@@ -11,12 +11,17 @@ class JobProfileForm(ModelForm):
         super(JobProfileForm, self).__init__(*args, **kwargs)
         self.fields['job_title'].widget.attrs.update({'class' : "form-control"})
         self.fields['department'].widget.attrs.update({'class' : "form-control"})
-        self.fields['job_type'].widget.attrs.update({'class' : "form-control"})
+        self.fields['job_type'].widget.attrs.update({'class' : "form-control", 'ng-model' : "job_type"})
         self.fields['job_description'].widget.attrs.update({'class' : "form-control"})
         self.fields['job_location'].widget.attrs.update({'class' : "form-control"})
         self.fields['job_start_date'].widget.attrs.update({'class' : "form-control"})
-        self.fields['salary_min'].widget.attrs.update({'class' : "form-control"})
-        self.fields['salary_max'].widget.attrs.update({'class' : "form-control"})
+        self.fields['salary_min'].widget.attrs.update({'class' : "form-control", 'ng-model':"salary_min"})
+        self.fields['salary_max'].widget.attrs.update({'class' : "form-control", 'ng-model':"salary_max", 'ng-change':'validate_salary_max()'})
+        self.fields['salary_type'].widget.attrs.update({'class' : "form-control"})
+        self.fields['job_period'].widget.attrs.update({'class' : "form-control"})
+        self.fields['min_degree_qulification'].widget.attrs.update({'class' : "form-control"})
+        
+        self.fields['job_period_data'].widget.attrs.update({'class' : "form-control"})
         self.fields['job_description'].widget.attrs['cols'] = 10
         self.fields['job_description'].widget.attrs['rows'] = 3
         self.fields['job_description'].widget.attrs['placeholder'] = 'Max. 300 characters'

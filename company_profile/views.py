@@ -14,6 +14,8 @@ from .models import CompanyUserProfile, JobProfile, Employe, UserProfile
 from .form import JobProfileForm, CompanyUserProfileForm
 from django.contrib.auth.forms import PasswordChangeForm
 
+from subjects import SUBJECT_TUPLE
+
 class CompanyRegistration(View):
 
     def get(self, request):

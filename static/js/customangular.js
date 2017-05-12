@@ -125,6 +125,8 @@ ruckusTool.controller("CreateProfileTab3Controeller", function($scope, $http, $l
 
 ruckusTool.controller("CreateJobProfileControeller", function($scope, $http, $location) {
 
+    $scope.salary_error_msg = false
+
     $scope.start_date_model = (new Date()).toISOString().split(':')[0].split('T')[0]
     $scope.tomorrow = new Date();
     var offset = 28 * 24 * 60 * 60 * 1000;
@@ -136,6 +138,24 @@ ruckusTool.controller("CreateJobProfileControeller", function($scope, $http, $lo
       $scope.date1 = new Date($scope.start_date_model);
       $scope.date2 = new Date($scope.end_date_model);
       $scope.time_diff = parseInt(( $scope.date2 -  $scope.date1) / (1000 * 60 * 60 * 24))
+    }
+
+    $scope.validate_salary_max = function(){
+        if ($scope.salary_min <= $scope.salary_max){
+            $scope.salary_error_msg = false
+        }else{
+            $scope.salary_max = null
+            $scope.salary_error_msg = true
+        }
+    }
+
+    $scope.validate_job_type = function(){
+
+      if($scope.job_type == 'Temporary' ||  $scope.job_type == 'Internship' || $scope.job_type == 'Apprenticeship' || $scope.job_type == 'Volunteer'){
+        return true
+      }else
+      return false
+
     }
 
 });

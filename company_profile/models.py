@@ -42,10 +42,19 @@ class CompanyUserProfile(models.Model):
 
 
 JOB_TYPE = (
-    ('Fulltime/Part-time', 'Fulltime/Part-time'),
-    ('Permanent/Temporary/Contract', 'Permanent/Temporary/Contract'),
-    ('Apprenticeships/Internship/Volunteer ', 'Apprenticeships/Internship/Volunteer ')
+    ('Permanent', 'Permanent'),
+    ('Temporary', 'Temporary'),
+    ('Freelance', 'Freelance'),
+    ('Remote', 'Remote'),
+    ('Internship', 'Internship'),
+    ('Apprenticeship', 'Apprenticeship'),
+    ('Volunteer', 'Volunteer'),
+    ('Full-Time', 'Full-Time'),
+    ('Part-Time', 'Part-Time'),
 )
+
+
+
 
 INDUSTRY_CHOICES = (
     ("IT-Software / Software Services", "IT-Software / Software Services"),
@@ -68,6 +77,24 @@ INDUSTRY_CHOICES = (
 
 MIN_SLRY = ((str(i), str(i)) for i in range(0, 31))
 MAX_SLRY = ((str(i), str(i)) for i in range(0, 31))
+SALARY_TYPE_CHOICES = (
+        ('Per Annum', 'Per Annum'),
+        ('Per Hour', 'Per Hour')
+    )
+
+
+JOB_PERIOD = (
+    ('Years', 'Years'),
+    ('Months', 'Months'),
+    ('Weeks', 'Weeks'),
+)
+
+MIN_DEGREE_QUALIFICATION = (
+    ('PhD', 'PhD'),
+    ('Masters', 'Masters'),
+    ('Bachelors', 'Bachelors'),
+    ('Diploma', 'Diploma')
+)
 
 class JobProfile(models.Model):
     company = models.ForeignKey(CompanyUserProfile)
@@ -77,8 +104,12 @@ class JobProfile(models.Model):
     job_description = models.TextField()
     job_location = models.CharField(max_length=100)
     job_start_date = models.DateTimeField()
+    job_period = models.CharField(max_length=100, blank=True, null=True, choices=JOB_PERIOD)
+    job_period_data =  models.CharField(max_length=100, blank=True, null=True)
+    salary_type = models.CharField(max_length=100, choices=SALARY_TYPE_CHOICES)
     salary_min = models.CharField(max_length=100, blank=True, null=True, choices=MIN_SLRY)
     salary_max = models.CharField(max_length=100, blank=True, null=True, choices=MAX_SLRY)
+    min_degree_qulification = models.CharField(max_length=100, blank=True, null=True, choices=MIN_DEGREE_QUALIFICATION)
     created_at = models.DateTimeField(auto_now_add=True)
     start_date = models.CharField(max_length=100)
     end_date = models.CharField(max_length=100)
@@ -92,3 +123,4 @@ class Employe(models.Model):
     mark = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     job_start_date = models.DateTimeField()
+

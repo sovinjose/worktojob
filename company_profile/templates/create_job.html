@@ -43,9 +43,23 @@
                                     
                                 </div><!-- /.form-group -->
                             </div><!-- /.row -->
-
                             <div class="row">
-                                <label class=" col-sm-3" style="margin-top: 2%;">Salary Range</label>
+                                <label class=" col-sm-3" style="margin-top: 2%;">Salary</label>
+                                <div class="form-group col-sm-9">
+                                {{form.salary_type}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class=" col-sm-3"></label>
+                                <label class=" col-sm-9" style="color: red" ng-show="salary_error_msg">Upto should higher than From</label>
+                            </div>
+                            <div class="row">
+                                <label class=" col-sm-3"></label>
+                                <label class=" col-sm-5">From</label>
+                                <label class=" col-sm-3">Upto</label>
+                            </div>
+                            <div class="row">
+                                <label class=" col-sm-3"></label>
                                 <div class="form-group col-sm-4">
                                     {{form.salary_min}}
                                     {{form.salary_min.errors}}
@@ -65,7 +79,17 @@
                                     {{form.job_type.errors}}
                                 </div><!-- /.form-group -->
                             </div><!-- /.row -->
-
+                            <div class="row" ng-if="validate_job_type()">
+                                <label class="col-sm-3" style="margin-top: 2%;">Job Period</label>
+                                <div class="form-group col-sm-4">
+                                    {{form.job_period}}
+                                    {{form.job_period.errors}}
+                                </div><!-- /.form-group -->
+                                <div class="form-group col-sm-4">
+                                    {{form.job_period_data}}
+                                    {{form.job_period_data.errors}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
 
                             <div class="row">
                                 <label class="col-sm-3" style="margin-top: 2%;">Job Start Date</label>
@@ -86,17 +110,36 @@
                                 </div><!-- /.form-group -->
                             </div><!-- /.row -->
 
-
                             <div class="row">
-                                <label class="col-sm-3" style="margin-top: 2%;">Job Description</label>
+                                <label class="col-sm-3" style="margin-top: 2%;">Job Description </label>
                                 <div class="form-group col-sm-9">
                                     {{form.job_description}}
                                     {{form.job_description.errors}}
                                 </div><!-- /.form-group -->
                             </div><!-- /.row -->
 
+                            <div class="row">
+                                <label class="col-sm-3">Min Degree Qualification</label>
+                                <div class="form-group col-sm-9">
+                                    {{form.min_degree_qulification}}
+                                    {{form.min_degree_qulification.errors}}
+                                </div><!-- /.form-group -->
+                            </div><!-- /.row -->
 
 
+                            <select class="form-control">
+                                <option value="1">'Medicine & dentistry'</option>
+                                <option value="2">'Subjects allied to medicine'</option>
+                                <option value="3">'Veterinary sciences'</option>
+                                <option value="4">'Biological sciences'</option>
+                                <option value="5">'Agriculture & related subjects'</option>
+                                <option value="6">'Physical sciences'</option>
+                                <option value="7">'Mathematical sciences'</option>
+                                <option value="8">'Computer science'</option>
+                                <option value="9">'Engineering & technology'</option>
+                                <option value="10">'Architecture, building & planning'</option>
+                                <option value="11">'Social studies', 'Social studies'</option>
+                            </select>
                         </div>
                     </div><!-- /.col-* -->
 
