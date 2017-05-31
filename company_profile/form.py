@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from .models import JobProfile, CompanyUserProfile
+from subjects import TECHNICAL_SKILL
 
 class JobProfileForm(ModelForm):
     class Meta:
@@ -10,7 +11,7 @@ class JobProfileForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(JobProfileForm, self).__init__(*args, **kwargs)
         self.fields['job_title'].widget.attrs.update({'class' : "form-control"})
-        self.fields['department'].widget.attrs.update({'class' : "form-control"})
+        #self.fields['department'].widget.attrs.update({'class' : "form-control"})
         self.fields['job_type'].widget.attrs.update({'class' : "form-control", 'ng-model' : "job_type"})
         self.fields['job_description'].widget.attrs.update({'class' : "form-control"})
         self.fields['job_location'].widget.attrs.update({'class' : "form-control"})
@@ -20,11 +21,22 @@ class JobProfileForm(ModelForm):
         self.fields['salary_type'].widget.attrs.update({'class' : "form-control"})
         self.fields['job_period'].widget.attrs.update({'class' : "form-control"})
         self.fields['min_degree_qulification'].widget.attrs.update({'class' : "form-control"})
-        
+
         self.fields['job_period_data'].widget.attrs.update({'class' : "form-control"})
         self.fields['job_description'].widget.attrs['cols'] = 10
         self.fields['job_description'].widget.attrs['rows'] = 3
         self.fields['job_description'].widget.attrs['placeholder'] = 'Max. 300 characters'
+
+        self.fields['sponsor_visa'].widget.attrs.update({'class' : "form-control"})
+        self.fields['work_experience_year'].widget.attrs.update({'class' : "form-control"})
+        self.fields['work_experience_months'].widget.attrs.update({'class' : "form-control"})
+        self.fields['industry_exp_year'].widget.attrs.update({'class' : "form-control"})
+        self.fields['industry_exp_months'].widget.attrs.update({'class' : "form-control"})
+        self.fields['certifications'].widget.attrs.update({'class' : "form-control"})
+
+        self.fields['tech_skills'].choices = [(str(options), str(options)) for options in TECHNICAL_SKILL]
+        self.fields['tech_skills'].widget.attrs.update({'class' : "form-control js-basic-multiple", 'multiple':"multiple", 'width':"100%"})
+    tech_skills = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control js-basic-multiple', 'style': 'width:100%'}),required=True)
 
 
 class CompanyUserProfileForm(ModelForm):

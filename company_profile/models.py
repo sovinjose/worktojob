@@ -96,23 +96,48 @@ MIN_DEGREE_QUALIFICATION = (
     ('Diploma', 'Diploma')
 )
 
+SPONSOR_VISA = (
+    ('YES', 'YES'),
+    ('NO', 'NO'),
+)
+
+WORK_EXPERINCE_YEAR = ((str(i), str(i)) for i in range(0, 20))
+WORK_EXPERINCE_MONTH = ((str(i), str(i)) for i in range(0, 13))
+IND_EXPERINCE_YEAR = ((str(i), str(i)) for i in range(0, 20))
+IND_EXPERINCE_MONTH = ((str(i), str(i)) for i in range(0, 13))
+
 class JobProfile(models.Model):
     company = models.ForeignKey(CompanyUserProfile)
-    job_title = models.CharField(max_length=100)
-    department = models.CharField(max_length=100, choices=INDUSTRY_CHOICES)
-    job_type = models.CharField(max_length=100, choices=JOB_TYPE)
     job_description = models.TextField()
+    job_start_date = models.DateField()
+    start_date = models.DateField()
+    end_date = models.DateField()
+    job_title = models.CharField(max_length=100)
     job_location = models.CharField(max_length=100)
-    job_start_date = models.DateTimeField()
-    job_period = models.CharField(max_length=100, blank=True, null=True, choices=JOB_PERIOD)
-    job_period_data =  models.CharField(max_length=100, blank=True, null=True)
+    subject_category = models.CharField(max_length=100, null=True, blank=True)
+    subject = models.CharField(max_length=100, null=True, blank=True)
+    job_type = models.CharField(max_length=100, choices=JOB_TYPE)
+    sponsor_visa = models.CharField(max_length=100, choices=SPONSOR_VISA)
     salary_type = models.CharField(max_length=100, choices=SALARY_TYPE_CHOICES)
+    certifications = models.CharField(max_length=100, blank=True, null=True)
+    job_period_data =  models.CharField(max_length=100, blank=True, null=True)
     salary_min = models.CharField(max_length=100, blank=True, null=True, choices=MIN_SLRY)
     salary_max = models.CharField(max_length=100, blank=True, null=True, choices=MAX_SLRY)
+    job_period = models.CharField(max_length=100, blank=True, null=True, choices=JOB_PERIOD)
+    industry_exp_year = models.CharField(max_length=100, choices=IND_EXPERINCE_YEAR)
+    industry_exp_months = models.CharField(max_length=100, choices=IND_EXPERINCE_MONTH)
+    work_experience_year = models.CharField(max_length=100, choices=WORK_EXPERINCE_YEAR)
+    work_experience_months = models.CharField(max_length=100, choices=WORK_EXPERINCE_MONTH)
     min_degree_qulification = models.CharField(max_length=100, blank=True, null=True, choices=MIN_DEGREE_QUALIFICATION)
     created_at = models.DateTimeField(auto_now_add=True)
-    start_date = models.CharField(max_length=100)
-    end_date = models.CharField(max_length=100)
+
+    def get_subject_cateogry_name(self):
+        return self.subject_sub_category
+
+
+class TechSkill(models.Model):
+    text = models.CharField(max_length=100)
+    job_profile = models.ForeignKey(JobProfile)
 
 
 class Employe(models.Model):

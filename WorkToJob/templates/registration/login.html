@@ -28,10 +28,12 @@
             {% if form.non_field_errors %}
                 <ul class='form-errors'>
                     {% for error in form.non_field_errors %}
-                        <li>{{ error }}</li>
+                        <li style="color:red">Incorrect Email/Password</li>
                     {% endfor %}
                 </ul>
             {% endif %}
+
+
 
               <form method="post" action="{% url "login" %}">{% csrf_token %}
                 <div class="form-group">
@@ -68,7 +70,7 @@
                 </div>
                 <hr>-->
                 <div class="form-group">
-                  <p>Don’t have an account? <a href="{% url 'company_registration_template' %}" style="color: #ed8735;font-size: 15px;">Get Started</a></p>
+                  <center><p>Don’t have an account? <a href="{% url 'company_registration_template' %}" style="color: #ed8735;font-size: 15px;">Get Started</a></p></center>
                 </div><!-- /.form-group -->
 
 
@@ -77,5 +79,7 @@
           </div><!-- /.row -->
   </div>
 
-
+  <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab');
+    </style>
 {% endblock %}

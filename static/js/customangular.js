@@ -123,6 +123,16 @@ ruckusTool.controller("CreateProfileTab3Controeller", function($scope, $http, $l
     $location.url('/view3');
 })
 
+ruckusTool.controller("UpdateJobProfileControeller", function($scope, $http, $location) {
+
+      $scope.init_method = function (val) {
+        $scope.get_subject_select_field()
+        $scope.subject_depatment = val
+      }
+
+
+})
+
 ruckusTool.controller("CreateJobProfileControeller", function($scope, $http, $location) {
 
     $scope.salary_error_msg = false
@@ -157,6 +167,17 @@ ruckusTool.controller("CreateJobProfileControeller", function($scope, $http, $lo
       return false
 
     }
+
+    $scope.get_subject_select_field = function(){
+        $http({
+            method: "GET",
+            url:'/get/'+$scope.subject+'/value',
+      }).success(function(data){
+            $scope.subject_list = data
+            $scope.subject_list_show = true
+      }).error(function(data, status, headers, config) {});
+    }
+    $scope.subject_list_show = false
 
 });
 

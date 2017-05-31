@@ -27,11 +27,22 @@
 					<h4>{{job_obj.job_title}}</h4>
 
 					<ul class="list-unstyled">
-					  <li><b>Location</b> : {{job_obj.job_title}}</li>
-					  <li><b>salary</b> : £{{job_obj.salary_min}},000 - £{{job_obj.salary_max}},000</li>
-					  <li><b>Start Date</b> : {{job_obj.job_start_date}}</li>
-					  <li>We are recruiting for a {{job_obj.job_type}} {{job_obj.department}}</li>
-					  <li><b>Description</b> : {{job_obj.job_description}}</li>
+                      <li><b>Job Title</b> : {{job_obj.job_title}}</li>
+                      <li><b>Location</b> : {{job_obj.job_title}}</li>
+                      <li><b>Start Date</b> : {{job_obj.job_start_date}}</li>
+                      <li>We are recruiting for a {{job_obj.job_type}} {{job_obj.department}}</li>
+                      <li><b>Description</b> : {{job_obj.job_description}}</li>
+                      <li><b>Department</b> : {{job_obj.subject}}</li>
+                      <li><b>Job Type</b> : {{job_obj.job_type}}</li>
+                      <li><b>Educational Qulification</b> : {{job_obj.min_degree_qulification}}</li>
+                      <li><b>Industry Experince</b> : {{job_obj.industry_exp_year}}.{{job_obj.industry_exp_months}} Year</li>
+                      <li><b>salary</b> : £{{job_obj.salary_min}},000 - £{{job_obj.salary_max}},000/{{job_obj.salary_type}}</li>
+                      <li><b>Description</b> : {{job_obj.job_description}}</li>
+                      <li><b>Skill Set</b> : {% for obj in skill  %} {{obj.text}}, {% endfor %}</li>
+                      <li><b>Visa Status</b> : {{job_obj.sponsor_visa}}</li>
+
+                      
+
 					</ul>
 				</div>
 			</div>

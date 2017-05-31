@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 
-from .models import CompanyUserProfile, JobProfile, Employe, UserProfile
+from .models import CompanyUserProfile, JobProfile, Employe, UserProfile, TechSkill
 from .form import JobProfileForm, CompanyUserProfileForm
 from django.contrib.auth.forms import PasswordChangeForm
 
@@ -86,7 +86,11 @@ class CreateJobView(View):
             form_obj = form.save(commit=False)
             form_obj.company = CompanyUserProfile.objects.get(user_profile=request.user)
             form_obj.save()
+            skill_list = [ TechSkill(text=obj, job_profile=form_obj) for  obj in request.POST.getlist('tech_skills')]
+            if skill_list:
+                TechSkill.objects.bulk_create(skill_list)
             return redirect('/job/%s/details' % (form_obj.id))
+        print form.errors
         context = {
                 'form' : form
         }
@@ -96,8 +100,10 @@ class ConfirmJobProfileView(View):
 
     def get(self, request, id):
         job_obj = JobProfile.objects.get(id=id)
+        skill = TechSkill.objects.filter(job_profile=id)
         context = {
-            'job_obj' : job_obj
+            'job_obj' : job_obj,
+            'skill' : skill
         }
         return render(request, 'show_job_profile.html', context)
 
@@ -111,6 +117,14 @@ class UpdateJobView(UpdateView):
 
     def get_success_url(self):
         return reverse('confirm_job_profile', args=(self.object.pk,))
+
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateJobView, self).get_context_data(**kwargs)
+        tech_list = TechSkill.objects.filter(job_profile=self.kwargs['pk']).values('text')
+        print ">>>>>>>>>>>>>>>>>>>", tech_list
+        context['skill_sets'] = list(tech_list)
+        return context
 
 
 class JobListView(View):
@@ -236,6 +250,12 @@ class ChangeLoginEmail(View):
         return redirect('/change/email')
 
 
+class GetSubjectOptionList(View):
+
+    def get(self, request, subject_val):
+        print "????????????????????", subject_val
+        print SUBJECT_TUPLE[subject_val]
+        return HttpResponse(json.dumps(SUBJECT_TUPLE[subject_val]), content_type="application/json")
 
 
 
