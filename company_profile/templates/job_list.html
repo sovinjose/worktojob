@@ -21,9 +21,13 @@
 <div class="row">
 {% for obj in job_list %}
     <div class="col-sm-3" style="margin-top: 1%;">
-        <div class="company-card" style="background-color: #fff;">
+        <div class="company-card" style="background-color: #fff; padding: 4%;">
+            <div class="pull-right">
+                <a href="{% url 'update_job_profile' obj.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="color:#ffa500"> Edit</i></a>
+            </div>
             <div class="company-card-image1" style="padding: 3%;">
-                <h3 style="font-size: 18px;font-weight:600;"> {{obj.job_title}}</h3>
+                <h3 style="font-size: 18px;font-weight:600;"> {{obj.job_title}}
+                </h3>
                 <p> £{{obj.salary_min}},000 - £{{obj.salary_max}},000</p>
                 <p> opening till at {{obj.job_start_date}}</p>
                 <p style="font-size: 16px;font-weight:600; color:green"> <b>78 Candidates</b></p>
@@ -31,6 +35,7 @@
                 <div class="center" >
                     <a href="{% url 'job_matching_list' obj.pk %}" class="btn" style="border-radius: 24px;background-color: #ed7631;color: #fcfdfd; font-size:10px">VIEW  CANDIDATES</a>
                 </div><!-- /.center -->
+
                 
             </div><!-- /.company-card-image -->
         </div><!-- /.company-card -->

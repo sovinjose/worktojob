@@ -40,16 +40,11 @@
                       <li><b>Description</b> : {{job_obj.job_description}}</li>
                       <li><b>Skill Set</b> : {% for obj in skill  %} {{obj.text}}, {% endfor %}</li>
                       <li><b>Visa Status</b> : {{job_obj.sponsor_visa}}</li>
-
-                      
-
-					</ul>
+                        <a href="{% url 'update_job_profile' job_obj.id %}" class="pull-right" style="color:#f6a250;font-size:14px"> <i class="fa fa-backward"> </i> <u>Edit Job Vaccancy Details </u> </a>
+                    </ul>
 				</div>
 			</div>
 
-            <div  style="margin-top: 6%;">
-                <a href="{% url 'update_job_profile' job_obj.id %}" style="color:#31708f;font-size:14px"> <i class="fa fa-backward" aria-hidden="true"> </i> <u>Go Back to Edit Jo </u> </a>
-            </div><!-- /.center -->
 		
 		</div>
 

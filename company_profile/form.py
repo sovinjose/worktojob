@@ -15,7 +15,7 @@ class JobProfileForm(ModelForm):
         self.fields['job_type'].widget.attrs.update({'class' : "form-control", 'ng-model' : "job_type"})
         self.fields['job_description'].widget.attrs.update({'class' : "form-control"})
         self.fields['job_location'].widget.attrs.update({'class' : "form-control"})
-        self.fields['job_start_date'].widget.attrs.update({'class' : "form-control"})
+        self.fields['start_date'].widget.attrs.update({'class' : "form-control"})
         self.fields['salary_min'].widget.attrs.update({'class' : "form-control", 'ng-model':"salary_min"})
         self.fields['salary_max'].widget.attrs.update({'class' : "form-control", 'ng-model':"salary_max", 'ng-change':'validate_salary_max()'})
         self.fields['salary_type'].widget.attrs.update({'class' : "form-control"})
@@ -29,9 +29,9 @@ class JobProfileForm(ModelForm):
 
         self.fields['sponsor_visa'].widget.attrs.update({'class' : "form-control"})
         self.fields['work_experience_year'].widget.attrs.update({'class' : "form-control"})
-        self.fields['work_experience_months'].widget.attrs.update({'class' : "form-control"})
+        #self.fields['work_experience_months'].widget.attrs.update({'class' : "form-control"})
         self.fields['industry_exp_year'].widget.attrs.update({'class' : "form-control"})
-        self.fields['industry_exp_months'].widget.attrs.update({'class' : "form-control"})
+        #self.fields['industry_exp_months'].widget.attrs.update({'class' : "form-control"})
         self.fields['certifications'].widget.attrs.update({'class' : "form-control"})
 
         self.fields['tech_skills'].choices = [(str(options), str(options)) for options in TECHNICAL_SKILL]

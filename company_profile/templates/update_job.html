@@ -23,11 +23,11 @@
 		<div class="col-sm-12">
             <form method="post" action=''>{% csrf_token %}
             <div class="row">
-                    <div class="col-sm-1">
+                    <div class="col-sm-2">
                     </div>
 
 
-                    <div class="col-sm-5"> 
+                    <div class="col-sm-7"> 
                         <h4 style="margin-bottom: 4%;color: #d26e13;">Job Profile</h4>
                         <div class="border-class">
                             <div class="row">
@@ -114,10 +114,10 @@
                                 <label class="col-sm-3" style="margin-top: 2%;">Job Start Date</label>
                                 <div class="form-group col-sm-9">                                    
                                     <div class="input-group input-append date" id="startDatePicker">
-                                        {{form.job_start_date}}
+                                        {{form.start_date}}
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    {{form.job_start_date.errors}}
+                                    {{form.start_date.errors}}
                                 </div><!-- /.form-group -->
                             </div><!-- /.row -->
 
@@ -182,41 +182,18 @@
                                     {{form.sponsor_visa.errors}}
                                 </div><!-- /.form-group -->
                             </div><!-- /.row -->
-
-
                             <div class="row">
-                                <label class=" col-sm-3">Work Experince</label>
-                                <label class=" col-sm-5">years</label>
-                                <label class=" col-sm-3">months</label>
-                            </div>
-                            <div class="row">
-                                <label class=" col-sm-3"></label>
-                                <div class="form-group col-sm-4">
+                                <label class=" col-sm-3">Work Experince <small>(years)</small></label>
+                                <div class="form-group col-sm-9">
                                     {{form.work_experience_year}}
                                     {{form.work_experience_year.errors}}
                                 </div><!-- /.form-group -->
-                                <label class=" col-sm-1" style="margin-top: 2%";></label>
-                                <div class="form-group col-sm-4">
-                                    {{form.work_experience_months}}
-                                    {{form.work_experience_months.errors}}
-                                </div><!-- /.form-group -->
                             </div><!-- /.row -->
-
                             <div class="row">
-                                <label class=" col-sm-3">Industry Experince</label>
-                                <label class=" col-sm-5">years</label>
-                                <label class=" col-sm-3">months</label>
-                            </div>
-                            <div class="row">
-                                <label class=" col-sm-3"></label>
-                                <div class="form-group col-sm-4">
+                                <label class=" col-sm-3">Industry Experince <small>(years)</small></label>
+                                <div class="form-group col-sm-9">
                                     {{form.industry_exp_year}}
                                     {{form.industry_exp_year.errors}}
-                                </div><!-- /.form-group -->
-                                <label class=" col-sm-1" style="margin-top: 2%";></label>
-                                <div class="form-group col-sm-4">
-                                    {{form.industry_exp_months}}
-                                    {{form.industry_exp_months.errors}}
                                 </div><!-- /.form-group -->
                             </div><!-- /.row -->
 
@@ -228,100 +205,13 @@
                                 </div><!-- /.form-group -->
                             </div><!-- /.row -->
                         </div>
+
                     </div><!-- /.col-* -->
-
-
-                    <div class="col-sm-1">
                     </div>
 
-                    <div class="col-sm-5">
-                        <h4 style=" margin-bottom: 4%;color: #d26e13;">Campaign Details</h4>
-
-
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <div class="row">
-                                    <div class="form-group col-sm-4">
-                                       <div class="small-box" style="padding: 0px;">
-                                            <div class="input-group input-append date" id="DatePicker">
-                                                <input class="form-control" id="id_start_date" ng-init="start_date_model={{form.start_date.value|date:'M d Y'}}" ng-model="start_date_model" ng-change="change_date_diff()" name="start_date" type="text" required="" placeholder="Start Date">
-                                            </div>
-                                        </div>
-                                    </div><!-- /.form-group -->
-
-                                    <div class="form-group col-sm-4">
-
-                                       <div class="small-box" style="padding: 0px;">
-                                            <div class="input-group input-append date" id="end_date">
-                                                <input class="form-control" id="id_end_date" ng-init="end_date_model={{form.end_date.value|date:'M d Y'}}" ng-model="end_date_model" ng-change="change_date_diff()" name="end_date" type="text" required="" placeholder="End Date">
-                                            </div>
-                                        </div>
-                                    </div><!-- /.form-group -->
-
-
-                                    <div class="form-group col-sm-4">
-                                        <div class="small-box" style="background-color: #f5f5f5;">
-                                            <div class="center" style="margin-top: 1%;">{[{time_diff}]} days</div>
-                                        </div>
-                                    </div><!-- /.form-group -->
-
-
-                                </div><!-- /.row -->
-                                </div><!-- /.company-card -->
-                            </div><!-- /.col-* -->
-
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <div class="row">
-                                        <div class="form-group col-sm-8">
-
-                                            <div class="small-box">
-                                                <div class="center" style="margin-top: 1%;">Candidates from all over UK</div>
-                                            </div>
-                                        </div><!-- /.form-group -->
-
-                                        <div class="form-group col-sm-4">
-                                            <div class="small-box">
-                                                <div class="center" style="margin-top: 1%;">Only from Job Locations</div>
-                                            </div>
-                                        </div><!-- /.form-group -->
-                                    </div><!-- /.row -->
-
-
-
-                                    <div class="row" style="margin-top: 7%; border: 1px solid;border-color: #73b5ee;background-color: white;">
-                                        <div class="col-sm-12" style="margin-top: 5%;    margin-bottom: 3%;">
-                                            <div class="col-sm-5">
-                                                <div id="preview">
-                                                    <canvas width="162" height="44" id="canvas-preview" style="width: 162px; height: 44px;margin-left: -35%!important;"></canvas>
-                                                  </div>
-                                                
-                                            </div>
-                                            <div class="col-sm-7">
-                                                <p> your audiance selection is fairly broad
-                                            </div>
-                                        </div><!-- /.company-card -->
-                                        <div class="col-sm-12" style="margin-bottom: 1%;">
-                                            <div class="small-box" style="font-weight: bold;">
-                                                <div class="center" style="margin-top: 1%;">170 Potential Candidates
-</div>
-                                            </div>
-                                            <p class="center" style="margin-top: 2%;"> This is only an estimate. Numbers shown are based on the latest available data, from your selected criteria. </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="center" style="margin-top: 13%;">
-                                        <button type="submit" class="btn btn-secondary" style="border-radius: 24px;background-color: #ed7631;">Review & Post Job</button>
-                                    </div><!-- /.center -->
-
-
-                                </div><!-- /.company-card -->
-                            </div><!-- /.col-* -->
-                        </div>
-
-
-
-
+                    <div class="center" style="margin-top: 2%;">
+                        <button type="submit" class="btn btn-secondary" style="border-radius: 24px;background-color: #ed7631;">Review & Post Vacancy</button>
+                    </div><!-- /.center -->
 
                     </form>
 
