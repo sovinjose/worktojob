@@ -277,6 +277,37 @@ ruckusTool.controller('submitFormController', function($scope, $http, $location)
     };
 });
 
+ruckusTool.controller("ShowCreateJobProfileControeller", function($scope, $http, $location, $timeout) {
+
+
+  $scope.loder_sleep = function(){
+      $scope.loader_visibility = true;
+
+        $timeout( function(){
+            $scope.loader_visibility = false;
+        }, 1000 );
+  };
+
+  $scope.loder_sleep()
+  $scope.campaign_location = true;
+  $scope.candidate_prediction = Math.floor((Math.random() * 500) + 50)
+
+  $scope.campaign_location_change_to_uk = function(){
+      $scope.loder_sleep()
+      $scope.campaign_location = true;
+      $scope.candidate_prediction = Math.floor((Math.random() * 500) + 50)
+  }
+  $scope.campaign_location_change_to_otherpalce = function(){
+      $scope.loder_sleep()
+      $scope.campaign_location = false;
+      $scope.candidate_prediction = Math.floor((Math.random() * 500) + 50)
+  }
+
+
+
+
+});
+
 
 
 

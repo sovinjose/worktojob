@@ -12,6 +12,10 @@
 {% block pageContent %}
 
 
+
+<script src="{% static 'plugins/gauge-js/gauge.min.js' %}"></script>
+<div ng-controller="ShowCreateJobProfileControeller">
+
 <div class="row">
 	<div class="col-sm-12">
 		<div class="col-sm-1">
@@ -53,22 +57,27 @@
 
         <div class="col-sm-5">
             <h4 style=" margin-bottom: 4%;color: #d26e13;">Campaign Details</h4>
+
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="row">
-                            <div class="form-group col-sm-8">
+                            <div class="form-group col-sm-4">
 
                                 <div class="small-box">
-                                    <div class="center" style="margin-top: 1%;">Candidates from all over UK</div>
+                                <button type="button" ng-show="campaign_location==false" class="btn  center" style="margin-top: 1%;background-color:#fff; color:black" ng-click="campaign_location_change_to_uk()">All over UK</button>
+                                <button type="button" ng-show="campaign_location==true" class="btn  center" style="margin-top: 1%;background-color:red; color:#fff">All over UK</button>
+
                                 </div>
                             </div><!-- /.form-group -->
-                            <div class="form-group col-sm-4">
+                            <div class="form-group col-sm-8">
                                 <div class="small-box">
-                                    <div class="center" style="margin-top: 1%;">Only from Job Locations</div>
+                                <button type="button" ng-show="campaign_location==true" class="btn center" style="margin-top: 1%;background-color:#fff; color:black" ng-click="campaign_location_change_to_otherpalce()">Only from Job Locations</button>
+                                <button type="button" ng-show="campaign_location==false" class="btn center" style="margin-top: 1%;background-color:red; color:#fff">Only from Job Locations</button>
                                 </div>
                             </div><!-- /.form-group -->
                         </div><!-- /.row -->
-                        <div class="row" style="margin-top: 7%; border: 1px solid;border-color: #73b5ee;background-color: white;">
+                        <img src="{% static 'img/ajax-loader.gif' %}" ng-show="loader_visibility" style="width: 94%;">
+                        <div class="row" style="margin-top: 7%; border: 1px solid;border-color: #73b5ee;background-color: white;" ng-show="loader_visibility==false">
                             <div class="col-sm-12" style="margin-top: 5%;    margin-bottom: 3%;">
                                 <div class="col-sm-5">
                                     <div id="preview">
@@ -81,9 +90,10 @@
                                 </div>
                             </div><!-- /.company-card -->
                             <div class="col-sm-12" style="margin-bottom: 1%;">
-                                <div class="small-box" style="font-weight: bold;">
-                                    <div class="center" style="margin-top: 1%;">170 Potential Candidates
-									</div>
+                                <div class="small-box">
+                                    <div class="center" style="margin-top: 1%;font-size: 15px;color: rgb(225, 112, 50);">
+                                    <b>{[{candidate_prediction}]} Potential Candidates</b>
+									                  </div>
                                 </div>
                                 <p class="center" style="margin-top: 2%;"> This is only an estimate. Numbers shown are based on the latest available data, from your selected criteria. </p>
                             </div>
@@ -97,6 +107,40 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+     $(document).ready(function() {
+
+          var opts = {
+            angle: -0.2, // The span of the gauge arc
+            lineWidth: 0.2, // The line thickness
+            radiusScale: 1, // Relative radius
+            pointer: {
+              length: 0.6, // // Relative to gauge radius
+              strokeWidth: 0.035, // The thickness
+              color: '#000000' // Fill color
+            },
+            limitMax: false,     // If false, max value increases automatically if value > maxValue
+            limitMin: false,     // If true, the min value of the gauge will be fixed
+            colorStart: '#6F6EA0',   // Colors
+            colorStop: '#8FC0DA',    // just experiment with them
+            strokeColor: '#E0E0E0',  // to see which ones work best for you
+            generateGradient: true,
+            highDpiSupport: true     // High resolution support
+          };
+          var target = document.getElementById('canvas-preview'); // your canvas element
+          var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+          var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+          gauge.maxValue = 3000; // set max gauge value
+          gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+          gauge.animationSpeed = 32; // set animation speed (32 is default value)
+          gauge.set($scope.candidate_prediction); // set actual value
+
+        
+    });
+
+
+</script>
+</div>
 <style type="text/css">
 	
 .border-class {
