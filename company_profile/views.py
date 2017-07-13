@@ -131,7 +131,6 @@ class JobListView(View):
 
     def get(self, request):
         job_list = JobProfile.objects.filter(company__user_profile=request.user)
-        print ">>>>>>>>>>>>>>>>>", job_list[0].start_date
         context = {
             'job_list' : job_list,
         }
