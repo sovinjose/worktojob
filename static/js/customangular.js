@@ -280,17 +280,51 @@ ruckusTool.controller('submitFormController', function($scope, $http, $location)
 ruckusTool.controller("ShowCreateJobProfileControeller", function($scope, $http, $location, $timeout) {
 
 
+
+
+$scope.plot_graph = function(data){
+
+
+       var opts = {
+          angle: -0.02, // The span of the gauge arc
+          lineWidth: 0.14, // The line thickness
+          radiusScale: 1, // Relative radius
+          pointer: {
+            length: 0.35, // // Relative to gauge radius
+            strokeWidth: 0.033, // The thickness
+            color: '#2A3269' // Fill color
+          },
+          limitMax: false,     // If false, the max value of the gauge will be updated if value surpass max
+          limitMin: false,     // If true, the min value of the gauge will be fixed unless you set it manually
+          colorStart: '#CACF3C',   // Colors
+          colorStop: '#8FC0DA',    // just experiment with them
+          strokeColor: '#E0E0E0',  // to see which ones work best for you
+          generateGradient: true,
+          highDpiSupport: true     // High resolution support
+        };
+        var target = document.getElementById('canvas-preview'); // your canvas element
+        var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+        gauge.maxValue = 1000; // set max gauge value
+        gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+        gauge.animationSpeed = 35; // set animation speed (32 is default value)
+        gauge.set(data); // set actual value
+
+};
+
+
+  $scope.candidate_prediction = Math.floor((Math.random() * 500) + 50)
+  
   $scope.loder_sleep = function(){
       $scope.loader_visibility = true;
 
         $timeout( function(){
             $scope.loader_visibility = false;
         }, 1000 );
+        $scope.plot_graph($scope.candidate_prediction);
   };
 
   $scope.loder_sleep()
   $scope.campaign_location = true;
-  $scope.candidate_prediction = Math.floor((Math.random() * 500) + 50)
 
   $scope.campaign_location_change_to_uk = function(){
       $scope.loder_sleep()
@@ -302,8 +336,6 @@ ruckusTool.controller("ShowCreateJobProfileControeller", function($scope, $http,
       $scope.campaign_location = false;
       $scope.candidate_prediction = Math.floor((Math.random() * 500) + 50)
   }
-
-
 
 
 });

@@ -11,9 +11,8 @@
 
 {% block pageContent %}
 
-
-
 <script src="{% static 'plugins/gauge-js/gauge.min.js' %}"></script>
+
 <div ng-controller="ShowCreateJobProfileControeller">
 
 <div class="row">
@@ -35,16 +34,17 @@
                       <li><b>Location</b> : {{job_obj.job_title}}</li>
                       <li><b>Start Date</b> : {{job_obj.job_start_date}}</li>
                       <li>We are recruiting for a {{job_obj.job_type}} {{job_obj.department}}</li>
-                      <li><b>Description</b> : {{job_obj.job_description}}</li>
                       <li><b>Department</b> : {{job_obj.subject}}</li>
                       <li><b>Job Type</b> : {{job_obj.job_type}}</li>
                       <li><b>Educational Qulification</b> : {{job_obj.min_degree_qulification}}</li>
                       <li><b>Industry Experince</b> : {{job_obj.industry_exp_year}}.{{job_obj.industry_exp_months}} Year</li>
                       <li><b>salary</b> : £{{job_obj.salary_min}},000 - £{{job_obj.salary_max}},000/{{job_obj.salary_type}}</li>
-                      <li><b>Description</b> : {{job_obj.job_description}}</li>
                       <li><b>Skill Set</b> : {% for obj in skill  %} {{obj.text}}, {% endfor %}</li>
                       <li><b>Visa Status</b> : {{job_obj.sponsor_visa}}</li>
+                      <li><b>Description</b> : {{job_obj.job_description}}</li>
+                      
                         <a href="{% url 'update_job_profile' job_obj.id %}" class="pull-right" style="color:#f6a250;font-size:14px"> <i class="fa fa-backward"> </i> <u>Edit Job Vaccancy Details </u> </a>
+
                     </ul>
 				</div>
 			</div>
@@ -60,28 +60,45 @@
 
                 <div class="row">
                     <div class="col-sm-8">
+
+
                         <div class="row">
-                            <div class="form-group col-sm-4">
+                            <div class="form-group col-sm-6">
+                                      <label for="example-text-input" class="col-form-label">Start Date</label>
+                                        <input class="form-control" type="text" id="cam_start_date" placeholder="Start Date">
+                                </div>
+                            <div class="form-group col-sm-6" style="padding-left: 0%;">
+                                      <label for="example-text-input" class="col-form-label">End Date</label>
+                                        <input class="form-control" type="text" id="cam_end_date" placeholder="End Date">
+                                </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="form-group col-sm-5">
 
                                 <div class="small-box">
-                                <button type="button" ng-show="campaign_location==false" class="btn  center" style="margin-top: 1%;background-color:#fff; color:black" ng-click="campaign_location_change_to_uk()">All over UK</button>
-                                <button type="button" ng-show="campaign_location==true" class="btn  center" style="margin-top: 1%;background-color:red; color:#fff">All over UK</button>
-
+                                <button type="button" ng-show="campaign_location==false" class="btn  center" style="margin-top: 1%;background-color:#fff; color:black;padding: 10px 28px;" ng-click="campaign_location_change_to_uk()">All over UK</button>
+                                <button type="button" ng-show="campaign_location==true" class="btn  center" style="margin-top: 1%;background-color:red; color:#fff; padding: 10px 28px;">All over UK</button>
                                 </div>
                             </div><!-- /.form-group -->
-                            <div class="form-group col-sm-8">
+                            <div class="form-group col-sm-7">
                                 <div class="small-box">
                                 <button type="button" ng-show="campaign_location==true" class="btn center" style="margin-top: 1%;background-color:#fff; color:black" ng-click="campaign_location_change_to_otherpalce()">Only from Job Locations</button>
                                 <button type="button" ng-show="campaign_location==false" class="btn center" style="margin-top: 1%;background-color:red; color:#fff">Only from Job Locations</button>
                                 </div>
                             </div><!-- /.form-group -->
                         </div><!-- /.row -->
+
                         <img src="{% static 'img/ajax-loader.gif' %}" ng-show="loader_visibility" style="width: 94%;">
                         <div class="row" style="margin-top: 7%; border: 1px solid;border-color: #73b5ee;background-color: white;" ng-show="loader_visibility==false">
                             <div class="col-sm-12" style="margin-top: 5%;    margin-bottom: 3%;">
                                 <div class="col-sm-5">
                                     <div id="preview">
+
                                         <canvas width="162" height="44" id="canvas-preview" style="width: 162px; height: 44px;margin-left: -35%!important;"></canvas>
+
+
                                       </div>
                                     
                                 </div>
@@ -107,40 +124,25 @@
 	</div>
 </div>
 
+
+
+</div>
+
 <script type="text/javascript">
-     $(document).ready(function() {
 
-          var opts = {
-            angle: -0.2, // The span of the gauge arc
-            lineWidth: 0.2, // The line thickness
-            radiusScale: 1, // Relative radius
-            pointer: {
-              length: 0.6, // // Relative to gauge radius
-              strokeWidth: 0.035, // The thickness
-              color: '#000000' // Fill color
-            },
-            limitMax: false,     // If false, max value increases automatically if value > maxValue
-            limitMin: false,     // If true, the min value of the gauge will be fixed
-            colorStart: '#6F6EA0',   // Colors
-            colorStop: '#8FC0DA',    // just experiment with them
-            strokeColor: '#E0E0E0',  // to see which ones work best for you
-            generateGradient: true,
-            highDpiSupport: true     // High resolution support
-          };
-          var target = document.getElementById('canvas-preview'); // your canvas element
-          var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-          var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-          gauge.maxValue = 3000; // set max gauge value
-          gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
-          gauge.animationSpeed = 32; // set animation speed (32 is default value)
-          gauge.set($scope.candidate_prediction); // set actual value
+var now = new Date();
+$("#cam_start_date").datepicker("setDate", now);
 
-        
-    });
+now.setDate(now.getDate() + 25);
+  
+$('#cam_start_date').datepicker({})
+$('#cam_end_date').datepicker({})
 
+$("#cam_end_date").datepicker("setDate", now);
 
 </script>
-</div>
+
+
 <style type="text/css">
 	
 .border-class {
