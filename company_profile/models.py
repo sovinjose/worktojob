@@ -138,8 +138,15 @@ class TechSkill(models.Model):
     job_profile = models.ForeignKey(JobProfile)
 
 
+EMP_STATUS = (
+    ('available', 'available'),
+    ('send invitation', 'send invitation'),
+    ('invitation accepted', 'invitation accepted'),
+)
+
 class Employe(models.Model):
     name = models.CharField(max_length=100)
+    status = models.CharField(max_length=100, choices=EMP_STATUS, default="online")
     department = models.CharField(max_length=100)
     college = models.CharField(max_length=100)
     degree = models.CharField(max_length=100)

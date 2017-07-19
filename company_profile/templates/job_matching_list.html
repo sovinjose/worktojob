@@ -79,11 +79,11 @@
                 </div><!-- /.col-* -->
 
                 <div class="col-sm-8">
-                    <div class="company-header">
+                    <div class="company-header" style="margin: 0px 0px 18px 0px;">
                         <h2>{{job_obj.job_title}}</h2>
                     </div><!-- /.company-header -->
 
-                    <h3 class="page-header">Job Description</h3>
+                    <h3 class="page-header" style="padding: 4px 0px 10px 0px;">Job Description</h3>
 
                     <p>
                         {{job_obj.job_description}}
@@ -105,15 +105,42 @@
                     <div class="positions-list" ng-show="loader_visibility==false">
                         <div id="inner-content-div" style="padding:2px;">
                         {% for obj in emp_obj %}
-                        <div class="positions-list-item">
-                            <h2><a href="#" ng-click="show_profile_details({{obj.id}})">{{obj.name}}</a></h2>
+                        <div class="positions-list-item" style="padding: 12px 0px 7px 0px;">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <input type='checkbox' name='thing' value='{{obj.id}}' id="checkbox{{obj.id}}"/>
+                                </div>
+                                <div class="col-sm-10">
+                            <h2><a href="#" ng-click="show_profile_details({{obj.id}})">{{obj.name}}</a>
+                            {% if obj.status == 'available' %}
+                            <span class="resume-main-verified" style="width: 96px;background-color: #55a747;padding: 6px;">available</span>
+                            {% elif obj.status == 'send invitation' %}
+                            <span class="resume-main-verified" style="width: 96px;background-color: #f99b3a;padding: 6px;">send invitation</span>
+                            {% elif obj.status == 'invitation accepted' %}
+                            <span class="resume-main-verified" style="width: 96px;background-color: #0f77a9;padding: 4px;">invitation accepted</span>
+                            {% endif %}
+
+                            
+                            </h2>
                             <h3>{{obj.degree}} <br></h3>
 
                             <div class="position-list-item-date" style="color:green">Mark : {{obj.mark}}</div><!-- /.position-list-item-date -->
+                            <h2>
+                                
+
+
+                            </h2>
                             <div class="position-list-item-action">College : {{obj.college}}</div><!-- /.position-list-item-action -->
+                                </div>
+                            </div>
                         </div><!-- /.positions-list-item -->
                         {% endfor %}
                         </div>
+
+                        <div class="resume-main-actions pull-right">
+                            <a href="#" class="btn btn-secondary"><i class="fa fa-download"></i> Download</a>
+                        </div><!-- /.resume-main-actions -->
+
                     </div><!-- /.positions-list -->
                 </div><!-- /.col-sm-8 -->
             </div>
@@ -204,7 +231,7 @@
     
 
 $('#inner-content-div').slimScroll({
-    height: '270px'
+    height: '290px'
 });
 </script>
 {% endblock %}
