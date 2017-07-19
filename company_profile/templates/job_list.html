@@ -30,11 +30,11 @@
             <table class="table table-striped">
                 <thead>
                     <tr style="color: #f99b3a;">
-                        <th>Tittle</th>
+                        <th>Title</th>
                         <th>Description</th>
                         <th><i class="fa fa-map-marker"></i> Location</th>
                         <th>Salary Range</th>
-                        <th>Opening till at</th>
+                        <th>Potential Candidate</th>
                         <th style="padding-left:6%">Actions</th>
                     </tr>
                 </thead>
@@ -42,13 +42,12 @@
                     {% for obj in job_list %}
                     <tr>
                         <td>{{obj.job_title}}</td>
-                        <td style="width: 38%;">{{obj.job_description}}</td>
+                        <td style="width: 30%;">{{obj.job_description}}</td>
                         <td>{{obj.job_location}}</td>
                         <td>£{{obj.salary_min}},000 - £{{obj.salary_max}},000</td>
-                        <td>{{obj.start_date}} </td>
+                        <td style="color:green">{{forloop.counter | add:"100" }} Candidates</td>
                         <td>
-                            <a href="{% url 'update_job_profile' obj.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="color:#ffa500"> Edit</i></a>
-                            <a href="{% url 'job_matching_list' obj.pk %}" class="btn">VIEW  CANDIDATES</a>
+                            <a href="{% url 'job_matching_list' obj.pk %}" class="btn">View Candidate</a>
                         </td>
                     </tr>
                     {% endfor %}

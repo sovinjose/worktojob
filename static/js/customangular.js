@@ -340,6 +340,66 @@ $scope.plot_graph = function(data){
 
 });
 
+ruckusTool.controller("JobMatchingControeller", function($scope, $http, $location, $timeout) {
+
+  $scope.loader_visibility = false;
+  $scope.loader_visibility_top_10 = false;
+  $scope.loader_visibility_all = true;
+  $scope.loader_visibility_latest = false;
+
+  $scope.change_color = function(val){
+
+        $scope.loader_visibility = true;
+
+
+        $timeout( function(){
+            $scope.loader_visibility = false;
+        }, 1000 );
+
+
+    if(val == 1){
+      $scope.loader_visibility_top_10 = true;
+      $scope.loader_visibility_all = false;
+      $scope.loader_visibility_latest = false;
+    }
+
+    if(val == 2){
+        $scope.loader_visibility_top_10 = false;
+        $scope.loader_visibility_all = true;
+        $scope.loader_visibility_latest = false;
+    }
+
+    if(val == 3){
+        $scope.loader_visibility_top_10 = false;
+        $scope.loader_visibility_all = false;
+        $scope.loader_visibility_latest = true;
+    }
+
+
+  }
+
+$scope.show_profile_details = function(id){
+
+$('#myModal').modal({'show': true})
+$scope.get_subject_select_field(id)
+
+}
+
+
+ $scope.get_subject_select_field = function(id){
+      $http({
+          method: "GET",
+          url:'/get/'+id+'/candidate',
+    }).success(function(data){
+          $scope.emp_prof = data
+          console.log('>>>>>>>>>>>>', data)
+    }).error(function(data, status, headers, config) {});
+  }
+
+
+
+});
+
 
 
 

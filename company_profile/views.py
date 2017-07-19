@@ -258,7 +258,21 @@ class GetSubjectOptionList(View):
         return HttpResponse(json.dumps(SUBJECT_TUPLE[subject_val]), content_type="application/json")
 
 
+class GetEmployeDetailsView(View):
 
+    def get(self, request, id):
+        emp = Employe.objects.get(id=id)
+        d = {
+
+            'name' : emp.name,
+            'department' : emp.department,
+            'college' : emp.college,
+            'degree' : emp.degree,
+            'mark' : emp.mark,
+            'location' : emp.location,
+
+        }
+        return HttpResponse(json.dumps(d), content_type="application/json")
 
 
 

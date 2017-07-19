@@ -12,74 +12,157 @@
 {% block pageContent %}
 
 
-<div class="row">
-	<div class="col-sm-12" style="margin-left: 4%">
-		<div class="col-sm-4">
-		<h4 style=" margin-bottom: 4%;color: #d26e13;">Job Profile</h4>
-			<div class="border-class">
-				<div class="job-preview job-preview--image-set is-ready job-preview--show-info">
-					<div class="jov-preview__status ">
-						<p> {{job_obj.job_title}} </p>
-					</div>
+<div ng-controller="JobMatchingControeller">
 
-					<ul class="list-unstyled">
-					  <li><b>Location</b> : {{job_obj.job_title}}</li>
-					  <li><b>salary</b> : £{{job_obj.salary_min}},000 - £{{job_obj.salary_max}},000</li>
-					  <li><b>Start Date</b> : {{job_obj.job_start_date}}</li>
-					  <li>We are recruiting for a {{job_obj.job_type}} {{job_obj.department}}</li>
-					  <li><b>Description</b> : {{job_obj.job_description}}</li>
-					</ul>
-				</div>
-			</div>
-		
-		</div>
-
-        <div class="col-sm-3">
-            <p style=" margin-bottom: 1%;color: #d26e13;">Select All | Top 10 |____</p>
-            <div id="inner-content-div" style="padding:2px;">
-            <div style="margin-left: 7%;margin-right: 7%">
-            {% for obj in emp_obj %}
-            <div class="row" style="margin-top: 7%; border: 1px solid;border-color: #73b5ee;background-color: white;">
-                <i class="fa fa-circle" aria-hidden="true" style="padding-left:2px; padding-top:4px; color:#ff7a00"></i>
+<div class="border-class">
+    <div class="job-preview job-preview--image-set is-ready job-preview--show-info">
+        <div class="row">
+                <div class="col-sm-4">
+                    <div class="company-card">
+            <div class="company-card-image">
+                <span>Employeer Details</span>
                 
-                <div class="col-sm-12" style="margin-bottom: 1%;">
+            </div><!-- /.company-card-image -->
 
-                    <div class="small-box" style="font-weight: bold;">
-                        <p style="margin-top: 2%;">{{obj.name}}
-                        </p>
-                    </div>
-                    <p style="margin: 0px"> {{obj.degree}}</p>
-                    <p style="margin: 0px"> {{obj.college}}</p>
-                    <p style="position:absolute;top:4px;right:6px;color:green"><b>{{obj.mark}}</b></p>
-                </div>
-            </div>
-            {% endfor %}
-            </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-        <h4 style=" margin-bottom: 4%;color: #d26e13;"></h4>
-            <div class="border-class">
-                <div class="job-preview job-preview--image-set is-ready job-preview--show-info">
-                    <div class="jov-preview__status ">
-                        <p> Profile Details </p>
-                    </div>
+            <div class="company-card-data">
+                <dl>
+                    <dt>Company Name</dt>
+                    <dd>{{job_obj.company.company_name}}</dd>
 
-                    <h4>{{job_obj.job_title}}</h4>
+                    <dt>Industry</dt>
+                    <dd>{{job_obj.company.industry}}</dd>
 
-                    <ul class="list-unstyled">
-                      <li><b>Location</b> : {{job_obj.job_title}}</li>
-                      <li><b>salary</b> : £{{job_obj.salary_min}},000 - £{{job_obj.salary_max}},000</li>
-                      <li><b>Start Date</b> : {{job_obj.job_start_date}}</li>
-                      <li>We are recruiting for a {{job_obj.job_type}} {{job_obj.department}}</li>
-                      <li><b>Description</b> : {{job_obj.job_description}}</li>
-                    </ul>
-                </div>
-            </div>       
-        </div>
-	</div>
+                    <dt>Company Size</dt>
+                    <dd>{{job_obj.company.company_size}}</dd>
+
+                    <dt>Contact Email</dt>
+                    <dd>{{job_obj.company.user_profile.email}}</dd>
+
+                    <dt>Location</dt>
+                    <dd>{{job_obj.company.user_profile.city}}</dd>
+                </dl>
+            </div><!-- /.company-card-data -->
+        </div><!-- /.company-card -->
+
+
+                    <div class="widget">
+                        <ul class="social-links">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                        </ul>
+                    </div><!-- /.widget -->
+
+                    <div class="widget">
+                        <h2>Job Profile</h2>
+
+                             <div class="company-card-data">
+                                <dl>
+
+                                    <dt>Location</dt>
+                                    <dd>{{job_obj.job_location}}</dd>
+
+                                    <dt>Job Type</dt>
+                                    <dd>{{job_obj.job_type}}</dd>
+
+                                    <dt>Salary</dt>
+                                    <dd>£{{job_obj.salary_min}},000 - £{{job_obj.salary_max}},000</dd>
+
+                                    <dt>Start Date</dt>
+                                    <dd>
+                                        {{job_obj.start_date}}
+                                    </dd>
+                                </dl>
+                            </div><!-- /.company-card-data -->
+                    </div><!-- /.widget -->
+                </div><!-- /.col-* -->
+
+                <div class="col-sm-8">
+                    <div class="company-header">
+                        <h2>{{job_obj.job_title}}</h2>
+                    </div><!-- /.company-header -->
+
+                    <h3 class="page-header">Job Description</h3>
+
+                    <p>
+                        {{job_obj.job_description}}
+                    </p>
+
+                    <div class="company-header">
+                        <a href="#" class="btn btn-default" ng-show="loader_visibility_top_10==false" ng-click="change_color(1)">Select All</a>
+                        <a href="#" class="btn btn-secondary" ng-show="loader_visibility_top_10==true">Select All</a>
+                        <a href="#" class="btn btn-default" ng-show="loader_visibility_all==false" ng-click="change_color(2)">Top 10</a>
+                        <a href="#" class="btn btn-secondary" ng-show="loader_visibility_all==true">Top 10</a>
+                        <a href="#" class="btn btn-default" ng-show="loader_visibility_latest==false" ng-click="change_color(3)">Latest</a>
+                        <a href="#" class="btn btn-secondary" ng-show="loader_visibility_latest==true">Latest</a>
+                    </div><!-- /.company-header -->
+
+
+
+                    <h3 class="page-header">Matching Candidates to Job</h3>
+                    <img src="{% static 'img/ajax-loader.gif' %}" ng-show="loader_visibility" style="width: 94%;">
+                    <div class="positions-list" ng-show="loader_visibility==false">
+                        <div id="inner-content-div" style="padding:2px;">
+                        {% for obj in emp_obj %}
+                        <div class="positions-list-item">
+                            <h2><a href="#" ng-click="show_profile_details({{obj.id}})">{{obj.name}}</a></h2>
+                            <h3>{{obj.degree}} <br></h3>
+
+                            <div class="position-list-item-date" style="color:green">Mark : {{obj.mark}}</div><!-- /.position-list-item-date -->
+                            <div class="position-list-item-action">College : {{obj.college}}</div><!-- /.position-list-item-action -->
+                        </div><!-- /.positions-list-item -->
+                        {% endfor %}
+                        </div>
+                    </div><!-- /.positions-list -->
+                </div><!-- /.col-sm-8 -->
+            </div>
+
+
+    </div>
 </div>
 
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="resume-main-content">
+                <h2>{[{emp_prof.name}]}
+                    <span class="resume-main-verified"><i class="fa fa-check"></i></span>
+                </h2>
+
+                <h3>{[{emp_prof.degree}]} 
+                                    <span class="resume-main-rating">
+                        Mark : {[{emp_prof.mark}]}
+                    </span><!-- /.resume-main-rating --></h3>
+
+                <p class="resume-main-contacts">
+                    <i class="fa fa-map-marker"></i>  {[{emp_prof.location}]}<br>
+                    Department: {[{emp_prof.department}]} - College: {[{emp_prof.college}]}
+
+                </p><!-- /.resume-main-contact -->
+
+                <div class="resume-main-actions">
+                    <a href="#" class="btn btn-secondary"><i class="fa fa-download"></i> Download</a>
+                </div><!-- /.resume-main-actions -->
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
 <style type="text/css">
 	
 .border-class {
@@ -108,6 +191,12 @@
 .is-ready .jov-preview__status {
     background-color: #ffd77c;
     color: #ee9a00;
+}
+.company-card-data dt {
+    float: left;
+    line-height: 24px;
+    padding: 8px 0px 8px 20px;
+    width: 124px;
 }
 
 </style>

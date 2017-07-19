@@ -2,7 +2,7 @@ from django.conf.urls import url
 from. views import ( CompanyRegistration, CheckUsername, 
 					CreateJobView, ConfirmJobProfileView, 
 					UpdateJobView, JobListView, JobMatchingList, ProfileSettings,
-					CompanySettings, AccountSettings, ChangeLoginEmail, GetSubjectOptionList)
+					CompanySettings, AccountSettings, ChangeLoginEmail, GetSubjectOptionList, GetEmployeDetailsView)
 
 urlpatterns = [
 
@@ -22,6 +22,8 @@ urlpatterns = [
 
 
 	url(r'get/(?P<subject_val>[0-9]+)/value$', GetSubjectOptionList.as_view(), name='get_subject_value'),
+
+	url(r'get/(?P<id>[0-9]+)/candidate$', GetEmployeDetailsView.as_view(), name='get_emp_details'),
 
 
 
