@@ -14,6 +14,11 @@ from .models import CompanyUserProfile, JobProfile, Employe, UserProfile, TechSk
 from .form import JobProfileForm, CompanyUserProfileForm
 from django.contrib.auth.forms import PasswordChangeForm
 
+from io import BytesIO
+from reportlab.pdfgen import canvas
+from django.http import HttpResponse
+
+
 from subjects import SUBJECT_TUPLE
 
 class CompanyRegistration(View):
@@ -268,11 +273,81 @@ class GetEmployeDetailsView(View):
             'department' : emp.department,
             'college' : emp.college,
             'degree' : emp.degree,
-            'mark' : emp.mark,
+            'score' : emp.score,
             'location' : emp.location,
+            'id' : emp.id,
+            'status' : emp.status
 
         }
         return HttpResponse(json.dumps(d), content_type="application/json")
+
+
+
+
+class DwonloadCandidatePDF(View):
+    
+    def get(self, request):
+        # Create the HttpResponse object with the appropriate PDF headers.
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="candidate_details.pdf"'
+
+        buffer = BytesIO()
+        
+        # Create the PDF object, using the BytesIO object as its "file."
+        p = canvas.Canvas(buffer)
+        n = 100
+
+        if request.GET.get('val_id', None):
+            ob = Employe.objects.get(id=request.GET.get('val_id'))
+            p.drawString(10, n, ob.name)
+            n=n+10
+            p.drawString(10, n, ob.department)
+            n=n+10
+            p.drawString(10, n, ob.college)
+            n=n+10
+            p.drawString(10, n, ob.degree)
+            n=n+10
+            p.drawString(10, n, '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>%s Details<<<<<<<<<<<<<<<<<<<<<<<<<<<' % ob.name)
+            n=n+10
+        else:
+            emp = Employe.objects.all()[:4]
+            for ob in emp:
+
+                # Draw things on the PDF. Here's where the PDF generation happens.
+                # See the ReportLab documentation for the full list of functionality.
+                p.drawString(10, n, ob.name)
+                n=n+10
+                p.drawString(10, n, ob.department)
+                n=n+10
+                p.drawString(10, n, ob.college)
+                n=n+10
+                p.drawString(10, n, ob.degree)
+                n=n+10
+                p.drawString(10, n, '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>%s Details<<<<<<<<<<<<<<<<<<<<<<<<<<<' % ob.name)
+                n=n+10
+
+        # Close the PDF object cleanly.
+        p.showPage()
+        p.save()
+
+        # Get the value of the BytesIO buffer and write it to the response.
+        pdf = buffer.getvalue()
+        buffer.close()
+        response.write(pdf)
+        return response
+
+class SendInvitationRequest(View):
+
+    def get(self, request):
+        lis = request.GET.getlist('lis')
+        for i in lis:
+            ob = Employe.objects.get(id=i)
+            ob.status = 'send invitation'
+            ob.save()
+        return HttpResponse(json.dumps({'status': True}), content_type="application/json")
+
+
+
 
 
 

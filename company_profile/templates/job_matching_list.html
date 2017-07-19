@@ -108,7 +108,7 @@
                         <div class="positions-list-item" style="padding: 12px 0px 7px 0px;">
                             <div class="row">
                                 <div class="col-sm-1">
-                                    <input type='checkbox' name='thing' value='{{obj.id}}' id="checkbox{{obj.id}}"/>
+                                    <input type='checkbox' name='candidate_checkbox' value='{{obj.id}}' id="checkbox{{obj.id}}"/>
                                 </div>
                                 <div class="col-sm-10">
                             <h2><a href="#" ng-click="show_profile_details({{obj.id}})">{{obj.name}}</a>
@@ -124,7 +124,7 @@
                             </h2>
                             <h3>{{obj.degree}} <br></h3>
 
-                            <div class="position-list-item-date" style="color:green">Mark : {{obj.mark}}</div><!-- /.position-list-item-date -->
+                            <div class="position-list-item-date" style="color:green">Score : {{obj.score}}</div><!-- /.position-list-item-date -->
                             <h2>
                                 
 
@@ -138,7 +138,8 @@
                         </div>
 
                         <div class="resume-main-actions pull-right">
-                            <a href="#" class="btn btn-secondary"><i class="fa fa-download"></i> Download</a>
+                            <a href="/download/candidate/profile" class="btn btn-secondary"><i class="fa fa-download"></i> Download</a>
+                            <a href="" ng-click="checkSelectedPhones()" class="btn btn-secondary" style="background-color: #f99b3a;"><i class="fa fa-send"></i>Send Invitation</a>
                         </div><!-- /.resume-main-actions -->
 
                     </div><!-- /.positions-list -->
@@ -165,12 +166,13 @@
       <div class="modal-body">
             <div class="resume-main-content">
                 <h2>{[{emp_prof.name}]}
-                    <span class="resume-main-verified"><i class="fa fa-check"></i></span>
                 </h2>
+                    <p class="" style="color:green">Status : {[{emp_prof.status}]}</p>
+
 
                 <h3>{[{emp_prof.degree}]} 
                                     <span class="resume-main-rating">
-                        Mark : {[{emp_prof.mark}]}
+                        Score : {[{emp_prof.score}]}
                     </span><!-- /.resume-main-rating --></h3>
 
                 <p class="resume-main-contacts">
@@ -179,9 +181,11 @@
 
                 </p><!-- /.resume-main-contact -->
 
-                <div class="resume-main-actions">
-                    <a href="#" class="btn btn-secondary"><i class="fa fa-download"></i> Download</a>
+                <div class="resume-main-actions" ng-show="emp_prof.score=='invitation accepted'">
+                    <a href="/download/candidate/profile?val_id={[{emp_prof.id}]}" class="btn btn-secondary"><i class="fa fa-download"></i> Download</a>
                 </div><!-- /.resume-main-actions -->
+                    <p style="color:#f99b3a" ng-show="emp_prof.score!='invitation accepted'">Download option only available for invitation accepted candidates</p>
+                
             </div>
       </div>
     </div>

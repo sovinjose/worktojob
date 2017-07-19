@@ -340,7 +340,7 @@ $scope.plot_graph = function(data){
 
 });
 
-ruckusTool.controller("JobMatchingControeller", function($scope, $http, $location, $timeout) {
+ruckusTool.controller("JobMatchingControeller", function($scope, $http, $route, $timeout) {
 
   $scope.loader_visibility = false;
   $scope.loader_visibility_top_10 = false;
@@ -396,6 +396,26 @@ $scope.get_subject_select_field(id)
     }).error(function(data, status, headers, config) {});
   }
 
+
+
+$scope.checkSelectedPhones = function(id) {
+    $scope.check_box_list = [];
+
+    $('input[name="candidate_checkbox"]:checked').each(function() {
+        $scope.check_box_list.push(this.value);
+    });
+
+    if($scope.check_box_list.length != 0){
+        $http({
+              method: "get",
+              url:'/send/invitiation/request',
+              params:{'lis' : $scope.check_box_list}
+        }).success(function(data){
+            location.reload('/')
+        }).error(function(data, status, headers, config) {});
+    }
+
+}
 
 
 });

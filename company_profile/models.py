@@ -150,7 +150,7 @@ class Employe(models.Model):
     department = models.CharField(max_length=100)
     college = models.CharField(max_length=100)
     degree = models.CharField(max_length=100)
-    mark = models.CharField(max_length=100)
+    score = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     job_start_date = models.DateTimeField()
 
