@@ -342,7 +342,7 @@ class SendInvitationRequest(View):
         lis = request.GET.getlist('lis')
         for i in lis:
             ob = Employe.objects.get(id=i)
-            ob.status = 'send invitation'
+            ob.status = 'invitation accepted'
             ob.save()
         return HttpResponse(json.dumps({'status': True}), content_type="application/json")
 

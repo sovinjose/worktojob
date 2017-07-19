@@ -181,11 +181,13 @@
 
                 </p><!-- /.resume-main-contact -->
 
-                <div class="resume-main-actions" ng-show="emp_prof.score=='invitation accepted'">
+                <div class="resume-main-actions" ng-show="emp_prof.status=='invitation accepted'">
                     <a href="/download/candidate/profile?val_id={[{emp_prof.id}]}" class="btn btn-secondary"><i class="fa fa-download"></i> Download</a>
                 </div><!-- /.resume-main-actions -->
-                    <p style="color:#f99b3a" ng-show="emp_prof.score!='invitation accepted'">Download option only available for invitation accepted candidates</p>
-                
+                    <p style="color:#f99b3a" ng-show="emp_prof.status!='invitation accepted'">Download option only available for invitation accepted candidates</p>
+                   
+
+
             </div>
       </div>
     </div>
